@@ -1,0 +1,20 @@
+
+/* Change H1 color #e63946 */
+.markdown-preview-view h1 , .cm-header-1 {
+  color: blue !important;
+}
+
+/* Change H2 color */
+.markdown-preview-view h2,.cm-header-2 {
+  color: yellow !important;
+}
+
+/* Change H3 color */
+.markdown-preview-view h3 ,.cm-header-3{
+  color:royalblue !important;
+}
+
+/* Change H3 color */
+.markdown-preview-view h4 ,.cm-header-4{
+  color:springgreen !important;
+}

@@ -1,0 +1,10 @@
+{
+  "cssTheme": "Tokyo Night",
+  "enabledCssSnippets": [
+    "headers",
+    "monospace",
+    "center-images"
+  ],
+  "showRibbon": true,
+  "baseFontSize": 18
+}

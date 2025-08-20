@@ -1,0 +1,10 @@
+/* Centers images in Editor Mode */
+
+.cm-editor img,.markdown-preview-view img {
+
+  display: block;           /* Makes the img tag a block element */
+  margin-left: auto;        /* Auto margin on the left */
+  margin-right: auto;       /* Auto margin on the right */
+  max-width: 100%;          /* Prevents image from overflowing */
+
+}

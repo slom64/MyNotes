@@ -1,0 +1,275 @@
+{
+  "main": {
+    "id": "53de6954cdd87f19",
+    "type": "split",
+    "children": [
+      {
+        "id": "11496cfa0944a5f5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0a7d3b6895c8ed2f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Active Directory/Privilege Escalation/DPAPI.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "DPAPI"
+            }
+          },
+          {
+            "id": "e04121627b0a49d4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "INE/ewapt/Information Gathering/Active/DNS zone transfers.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "DNS zone transfers"
+            }
+          },
+          {
+            "id": "f3960d32b7b61299",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "A Method/Pivot/Ligolo.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Ligolo"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8e069b618c5458cc",
+    "type": "split",
+    "children": [
+      {
+        "id": "0afa6b923bf27ef2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "79bb53e617f949fa",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "fa12ffc36acde04f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "526e24e356603929",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "9a114e1a1160d623",
+    "type": "split",
+    "children": [
+      {
+        "id": "8b72eab476da88fc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8a8ce1073f9d39a6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "OSCP/Privilege Escalation/Windows/Attacking OS/Vulnerable Services.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Vulnerable Services"
+            }
+          },
+          {
+            "id": "08caf14e318ba87d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/2. Enumerating Policies.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2. Enumerating Policies"
+            }
+          },
+          {
+            "id": "5be76b30b33e6f2f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "0e37790b8b139322",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/2. Enumerating Policies.md",
+                "followCursor": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2. Enumerating Policies"
+            }
+          },
+          {
+            "id": "f801c17d25e10a4f",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-local-images-plus:Local Images Plus  0.16.3\r\nLocalize attachments (plugin folder)": false
+    }
+  },
+  "active": "0a7d3b6895c8ed2f",
+  "lastOpenFiles": [
+    "A Method/Enum/$Enum.md",
+    "A Method/File Transfer/$File Transfer.md",
+    "A Method/Pivot/$Pivot.md",
+    "A Method/PrivEsc/Linux/$PATH/$$PATH.md",
+    "A Method/PrivEsc/Linux/Encrytion/$Encrytion.md",
+    "A Method/PrivEsc/Linux/File System/$File System.md",
+    "A Method/PrivEsc/Linux/Sudo/$Sudo.md",
+    "A Method/PrivEsc/Linux/Version/$Version.md",
+    "A Method/PrivEsc/Linux/$Linux.md",
+    "A Method/PrivEsc/Windows/Credentials/$Credentials.md",
+    "A Method/PrivEsc/Windows/$Windows.md",
+    "A Method/PrivEsc/$PrivEsc.md",
+    "A Method/$A Method.md",
+    "Active Directory/4. Kerberose/$4. Kerberose.md",
+    "Active Directory/5. DACL/$5. DACL.md",
+    "Active Directory/PowerShell/$PowerShell.md",
+    "Active Directory/Privilege Escalation/$Privilege Escalation.md",
+    "Active Directory/$Active Directory.md",
+    "HTB Academy/Active Directory/1. Setting The Stage/$1. Setting The Stage.md",
+    "HTB Academy/Active Directory/10. Why So Trusting?/$10. Why So Trusting?.md",
+    "HTB Academy/Active Directory/11. Breaking Down Boundaries/$11. Breaking Down Boundaries.md",
+    "HTB Academy/Active Directory/12. Defensive Considerations/$12. Defensive Considerations.md",
+    "HTB Academy/Active Directory/2. Initial Enumeration/$2. Initial Enumeration.md",
+    "HTB Academy/Active Directory/3. Sniffing out a Foothold/$3. Sniffing out a Foothold.md",
+    "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/$4. Sighting In, Hunting For A User.md",
+    "HTB Academy/Active Directory/5. Spray Responsibly/$5. Spray Responsibly.md",
+    "Network/DNS",
+    "Network",
+    "INE/ewapt/Information Gathering/Active",
+    "Tools/Misc",
+    "INE/ewapt/Information Gathering/Passive",
+    "INE/ewapt/Information Gathering",
+    "INE/ewapt",
+    "INE",
+    "Web/1. Recone",
+    "Active Directory/Privilege Escalation",
+    "Z Assets/Images/Pasted image 20250819081407.jpeg",
+    "Z Assets/Images/Pasted image 20250819081407.png",
+    "Z Assets/Images/Pasted image 20250817212426.png",
+    "Z Assets/Images/Pasted image 20250817212324.jpeg",
+    "Z Assets/Images/Pasted image 20250817212324.png",
+    "Z Assets/Images/Pasted image 20250816120545.jpeg",
+    "Z Assets/Images/Pasted image 20250816120545.png",
+    "Z Assets/Images/Pasted image 20250816120509.jpeg",
+    "Z Assets/Images/Pasted image 20250816120509.png",
+    "Z Assets/Images/Pasted image 20250816120341.jpeg",
+    "HTB/linux/easy/Untitled.canvas",
+    "Z Assets/Templates/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
+    "Z Assets/Templates/Labs/Lab 1 - Example/LAB 1.canvas",
+    "Templates/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
+    "Templates/Labs/Lab 1 - Example/LAB 1.canvas",
+    "obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
+    "obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas",
+    "Z Assets/obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
+    "Z Assets/obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas",
+    "Untitled.canvas"
+  ]
+}
