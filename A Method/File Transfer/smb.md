@@ -4,7 +4,7 @@
 mkdir -p share
 chmod 777 share
 
-impacket-smbserver share ./share -smb2support
+sudo impacket.smbserver share ./share -smb2support
 
 ```
 

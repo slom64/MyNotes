@@ -1,9 +1,9 @@
 ```sh
-find /  -user enzo -readable -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
+find /  -user miranda-wise -readable -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
 ```
 
 ```sh
-find / -user root -perm -006 -type f 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
+find / -user miranda-wise -perm -006 -type f 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
 ```
 
 ### Find Files Writable by a Specific User

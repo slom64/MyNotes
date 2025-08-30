@@ -4,40 +4,17 @@ status:
 tags: 
 aliases:
 ---
-# Resolution summary
-
->[!summary]
->- Step 1
->- Step 2
-
-## Improved skills
-
-- Skill 1
-- Skill 2
-
-## Used tools
-
-- nmap
-- gobuster
-
-
 ---
 
 # Information Gathering
 
-Scanned all TCP ports:
+Scanned top TCP ports:
 
 ```sh
 
 ```
 
 Enumerated open TCP ports:
-
-```sh
-
-```
-
-Enumerated top 200 UDP ports:
 
 ```sh
 
@@ -93,3 +70,9 @@ Enumerated top 200 UDP ports:
 ```sh
 
 ```
+
+# Resolution summary
+
+>[!summary]
+>- Step 1
+>- Step 2

