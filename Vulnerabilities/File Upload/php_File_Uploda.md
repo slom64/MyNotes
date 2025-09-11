@@ -19,7 +19,7 @@ GIF89a <?php
 
 ```
 
-## Werid php extensions
+## Weird php extensions
 - phtml
 - phar
 - 

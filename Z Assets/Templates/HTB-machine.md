@@ -5,6 +5,9 @@ tags:
 aliases:
 ---
 ---
+# Main Ideas
+
+---
 
 # Information Gathering
 

