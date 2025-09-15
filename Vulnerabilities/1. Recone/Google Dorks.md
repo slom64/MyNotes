@@ -8,6 +8,6 @@
 | intitle:admin<br><br>intitle:index of          | limits the results for pages that contain this string inside their page title.<br><br>search for websites that have directory listing in it.                     |
 | filetype:pdf                                   |                                                                                                                                                                  |
 | cache:site                                     |                                                                                                                                                                  |
-| intext:"yourword"                              | This work should be in the page.                                                                                                                                 |
+| intext:"yourword"<br>"Yourword"                | This word should be in the page.                                                                                                                                 |
 
 use `exploit-db` they have nice google dorks examples
