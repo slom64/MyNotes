@@ -3,7 +3,7 @@ The command executed Bloodhound.py with the user `forend`. We specified our name
 ```shell
 
 bloodhound-python -u 'levi.james' -p 'KingofAkron2025!'  -d puppy.htb -ns 10.xx.xx.xx -c All --zip
-
+bloodhound-ce-python -d fluffy.htb  -dc dc01.fluffy.htb -u 'j.fleischman' -k -no-pass -ns 10.10.11.69
 ```
 
 We can either upload each JSON file one by one or zip them first with a command such as `zip -r ilfreight_bh.zip *.json` and upload the Zip file. We do this by clicking the `Upload Data` button on the right side of the window (green arrow). When the file browser window pops up to select a file, choose the zip file (or each JSON file) (red arrow) and hit `Open`.

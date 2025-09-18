@@ -1,9 +1,3 @@
-```sh
-
-```
-
-[[Z Assets/Images/Pasted image 20250819081407.jpeg|500]]
-![[Z Assets/Images/Pasted image 20250819081407.jpeg]]
 
 ```txt
 
@@ -27,33 +21,27 @@
 ____________
 
 [libdefaults]
-        default_realm = DUMMY.REALM
-        dns_lookup_kdc = true
-        dns_lookup_realm = true
-
-# The following krb5.conf variables are only for MIT Kerberos.
-        kdc_timesync = 1
-        ccache_type = 4
-        forwardable = true
-        proxiable = true
-        rdns = false
-        dns_lookup_kdc = true
-        dns_lookup_realm = true
-
-# The following libdefaults parameters are only for Heimdal Kerberos.
-        fcc-mit-ticketflags = true
+    default_realm = FLUFFY.HTB
+    dns_lookup_kdc = false
+    dns_lookup_realm = false
+    ticket_lifetime = 24h
+    forwardable = true
 
 [realms]
-        DUMMY.REALM = {
-                kdc = dummy.local
-                admin_server = dummy.local
-        }
+    FLUFFY.HTB = {
+        kdc = dc01.fluffy.htb
+        admin_server = dc01.fluffy.htb
+    }
+    LOGISTICS.INLANEFREIGHT.LOCAL = {
+        kdc = academy-ea-dc02.inlanefreight.local
+        admin_server = academy-ea-dc02.inlanefreight.local
+    }
 
 [domain_realm]
-        .puppy.htb = PUPPY.HTB
-        puppy.htb = PUPPY.HTB
-        .mit.edu = ATHENA.MIT.EDU
-        mit.edu = ATHENA.MIT.EDU
+    .fluffy.htb = FLUFFY.HTB
+    fluffy.htb = FLUFFY.HTB
+    .logistics.inlanefreight.local = LOGISTICS.INLANEFREIGHT.LOCAL
+    logistics.inlanefreight.local = LOGISTICS.INLANEFREIGHT.LOCAL
 
 
 
