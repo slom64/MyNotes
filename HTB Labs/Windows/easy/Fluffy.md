@@ -1,3 +1,5 @@
+#ESC16
+
 10.10.11.69
 The lab comes with credentials: ` j.fleischman / J0elTHEM4n1990! `
 
@@ -24,7 +26,7 @@ Our user can do `SMB`,`LDAP`. So, we start bloodhound
 bloodhound-ce-python -d fluffy.htb  -dc dc01.fluffy.htb -u 'j.fleischman' -k -no-pass -ns 10.10.11.69
 ```
 
-We investigate the SMB and found this in one of the pdfs: [[Z Assets/Images/Pasted image 20250917182534.jpeg]]
+We investigate the SMB and found this in one of the pdfs:
 ![[Z Assets/Images/Pasted image 20250917182534.jpeg]]
 
 By looking at `CVE-2025-24071`, we found if we apple to put malicious zip file in the server, then someone tries to unzip it that will trigger request to our attacker `SMB` server contains the NTLM hash of the user who tried to do so. for more https://www.exploit-db.com/exploits/52310.
@@ -37,7 +39,6 @@ we create malicious zip file and put our SMB server. then uploaded the file usin
     parser.add_argument("--keep", action="store_true", help="Keep .library-ms file after ZIP creation")
 ```
 
-[[Z Assets/Images/Pasted image 20250917182927.jpeg|Open: Pasted image 20250917182927.png]]
 ![[Z Assets/Images/Pasted image 20250917182927.jpeg]]
 
 ```
@@ -69,11 +70,8 @@ prometheusx-303
 ---
 
 Lets check bloodhound using the new user:
-[[Z Assets/Images/Pasted image 20250918024412.jpeg|Open: Pasted image 20250918024412.png]]
 ![[Z Assets/Images/Pasted image 20250918024412.jpeg]]
-[[Z Assets/Images/Pasted image 20250918024456.jpeg|Open: Pasted image 20250918024456.png]]
 ![[Z Assets/Images/Pasted image 20250918024456.jpeg]]
-[[Z Assets/Images/Pasted image 20250918063825.jpeg|Open: Pasted image 20250918063825.png]]
 ![[Z Assets/Images/Pasted image 20250918063825.jpeg]]
 
 And if we looked at certipy output:
@@ -137,11 +135,7 @@ gettgtpkinit.py -cert-pfx PQ92rPNQ.pfx \
 export KRB5CCNAME=CA_SVC.ccache
 ```
 
-if we do certpy find we will find that its vuln to ESC16:
-```
-
-```
-
+if we do `certpy find`we will find that its vuln to ESC16.
 Exploit:
 ```sh
 

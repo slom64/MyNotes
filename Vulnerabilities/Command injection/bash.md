@@ -200,45 +200,27 @@ $(echo $(id))
 Not really. It depends **heavily on the vulnerable context**:
 
 1. **Arithmetic / array contexts** ✅
-    
     - If the injection point is inside `(( ... ))`, `[[ ... -eq ... ]]`, or something that interprets array indexing, then yes — `a[$(...)]` can bypass numeric-only expectations.
     - Example:
-        
-        ```bash
-        x=5
-        if [[ $x -eq a[$(id)] ]]; then echo hi; fi
-        ```
-        
-        → Runs `id`.
-        
+```bash
+x=5
+if [[ $x -eq a[$(id)] ]]; then echo hi; fi
+```
 2. **Plain command execution** (e.g. `eval "$code"`, `sh -c "$input"`) 🚫
-    
-    - In those cases, you don’t need the `a[...]` trick at all — `$(...)` alone will work fine.
-        
+	- In those cases, you don’t need the `a[...]` trick at all — `$(...)` alone will work fine.
 3. **Quoted strings** (e.g. `"value='$code'"`) ⚠️
-    
-    - If the vulnerable spot is inside quotes or passed as an argument, then `a[$(...)]` might actually break things, because array syntax won’t be valid there.
-        
+    - If the vulnerable spot is inside quotes or passed as an argument, then `a[$(...)]` might actually break things, because array syntax won’t be valid there.        
 4. **Other shells** (dash, sh, zsh) 🤔
-    
     - This trick is very **bash-specific**.
-        
     - `dash` (used in Debian/Ubuntu for `/bin/sh`) doesn’t support arrays, so `a[...]` would fail before `$(...)` executes.
-        
-
 ---
 
 ### ✅ When it _shines_
 
 This trick is especially useful when:
-
 - You’re injecting into a **numeric comparison** or arithmetic expression.
-    
 - The developer thinks only numbers will be allowed.
-    
 - Direct `$(...)` would cause parsing errors.
-    
-
 ---
 
 👉 So your intuition is right: it’s a **bypass technique** that works in certain command injection scenarios, but it’s **not universal**.

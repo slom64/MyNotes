@@ -1,5 +1,13 @@
 Got it 👍 You want to mount your HDD drive on Linux (Ubuntu, since that’s what you’re using). I’ll walk you through the steps:
 
+```
+sudo mount -t ntfs-3g /dev/sdb1 /mnt/HardDrive
+sudo ntfsfix /dev/sda1
+
+sudo umount /mnt/HardDrive
+sudo udisksctl power-off -b /dev/sda1
+```
+
 ---
 
 ### 1. **Find your drive**
