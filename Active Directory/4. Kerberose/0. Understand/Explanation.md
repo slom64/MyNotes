@@ -13,7 +13,6 @@ confirms that known user is making access request and issue `TGT`
 Confirms that a user is making an access reques to known service, and issue `ST` service tickets. `TGS` 
 
 
-[[Z Assets/Images/Pasted image 20250817212426.png]]
 ![[Z Assets/Images/Pasted image 20250817212426.png]]
 
 Before start, there is 2 types of messages:
@@ -42,9 +41,8 @@ Mainly there is 3 important phases sent from user:
 > [!NOTE] **Ticket granting ticket decryption**
 > **User can't decrypt TGT *'ticket granting ticket'* because he doesn't has TGS secret key**.
 
-[[Z Assets/Images/Pasted image 20250918182530.jpeg|Open: Pasted image 20250918182530.png]]
 ![[Z Assets/Images/Pasted image 20250918182530.jpeg]]
-[[Z Assets/Images/Pasted image 20250918182602.jpeg|Open: Pasted image 20250918182602.png]]
+
 ![[Z Assets/Images/Pasted image 20250918182602.jpeg]]
 
 ## phase 2
@@ -67,9 +65,8 @@ Mainly there is 3 important phases sent from user:
 	- now user has a copy of `serive session key`.
 	- User can't decrypte `ST`, because he doesn't has `service secret key`.
 
-[[Z Assets/Images/Pasted image 20250918182645.jpeg|Open: Pasted image 20250918182645.png]]
 ![[Z Assets/Images/Pasted image 20250918182645.jpeg]]
-[[Z Assets/Images/Pasted image 20250918182728.jpeg|Open: Pasted image 20250918182728.png]]
+
 ![[Z Assets/Images/Pasted image 20250918182728.jpeg]]
 
 
@@ -85,10 +82,8 @@ Mainly there is 3 important phases sent from user:
 - Then the service use it cache to save recently `User authenticator`, and make sure there is no other entry for the same user authenticator. replay protaction
 - Then the service send it own authenticator `Service authenticator`: contain `ServiceName/ID`, timeStamp. 🔒ecrypted using `service session key`
 - User decrypte `Service authenticator` using `service session key`. And user will cache the encrypted `ST` for future use.
-[[Z Assets/Images/Pasted image 20250918182832.jpeg|Open: Pasted image 20250918182832.png]]
 ![[Z Assets/Images/Pasted image 20250918182832.jpeg]]
 
-[[Z Assets/Images/Pasted image 20250918182914.jpeg|Open: Pasted image 20250918182914.png]]
 ![[Z Assets/Images/Pasted image 20250918182914.jpeg]]
 
 > [!question] TGT request cracking
@@ -138,3 +133,8 @@ So you're absolutely right to question this - without pre-authentication, it wou
 2. KDC returns AS-REP containing EncPart encrypted under the user key.
 3. Attacker runs offline cracking (dictionary/wordlist, hashcat/john/etc.) against that encrypted blob until they recover the password/hash.
 4. With the password/hash they can decrypt the EncPart, get the TGS session key, and then use the TGT legitimately.
+
+---
+
+> [!question] TGT rely
+> If we were able to get TGT by doing MITM attack, that won't be enough to use the TGT because we need the session key, is that right?

