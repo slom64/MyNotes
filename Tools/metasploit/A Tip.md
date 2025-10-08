@@ -28,3 +28,8 @@ exploit
 
 > [!NOTE] Title
 > Choose different `LPORT`, Because you will get new shell session with elevated user.
+
+
+> [!NOTE]
+> put files in C:\windows\temp. So you may bypass AV. But you won't be able to list this directory.
+

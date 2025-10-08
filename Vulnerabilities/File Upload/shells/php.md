@@ -22,4 +22,4 @@ GIF89a <?php
 ## Weird php extensions
 - phtml
 - phar
-- 
+ 
