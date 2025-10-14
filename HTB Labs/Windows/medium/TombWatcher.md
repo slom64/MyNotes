@@ -1,8 +1,6 @@
 ## Nutshell
 - Some ACL stuff.
 - restore deleted user that can request a vulnerable `ESC15` certificate. 
-
-
 ---
 
 IP: 10.10.11.72

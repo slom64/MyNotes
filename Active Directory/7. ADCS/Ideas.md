@@ -1,0 +1,2 @@
+- [ ] Check for stored certificates.
+- [ ] Use certificates to retrive the hash of the user.

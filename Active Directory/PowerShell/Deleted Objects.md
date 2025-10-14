@@ -19,9 +19,17 @@ Get-ADObject -Filter 'objectClass -eq "user"' -IncludeDeletedObjects |  Select-O
 ```
 
 
+
+
+
 ### restore user.
 ```
 Restore-ADObject -Identity 938182c3-bf0b-410a-9aaa-45c8e1a02ebf
 Enable-ADAccount -Identity cert_admin
 Set-ADAccountPassword -Identity cert_admin -Reset -NewPassword (ConvertTo-SecureString "Abc123456@" -AsPlainText -Force)
 ```
+
+
+Get-ADObject -IncludeDeletedObjects -Filter "samAccountName -eq 'theuser'" ` -Properties whenDeleted,msDS-LastKnownParent,msDS-Recycled |  Format-List Name,SamAccountName,DistinguishedName,whenDeleted,msDS-LastKnownParent,msDS-Recycled
+
+Get-ADUser -Filter {SamAccountName -eq 'theuser'} -Properties Enabled,DistinguishedName |  Format-List SamAccountName,Enabled,DistinguishedName
