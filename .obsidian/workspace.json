@@ -8,33 +8,63 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0a7d3b6895c8ed2f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Active Directory/Privilege Escalation/DPAPI.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "DPAPI"
-            }
-          },
-          {
             "id": "e04121627b0a49d4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "INE/ewapt/Information Gathering/Active/DNS zone transfers.md",
+                "file": "Vulnerabilities/XSS/Context/DOM.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "DNS zone transfers"
+              "title": "DOM"
+            }
+          },
+          {
+            "id": "780e7fa0887e5629",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Vulnerabilities/XSS/1. Ideas.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "1. Ideas"
+            }
+          },
+          {
+            "id": "af48dc6c06f63411",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tools/Active directory/RunasCs.exe.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "RunasCs.exe"
+            }
+          },
+          {
+            "id": "addac032ec46c5a4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "A Method/Pivot/Ligolo/1. Simple.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "1. Simple"
             }
           },
           {
@@ -43,13 +73,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "A Method/Pivot/Ligolo.md",
+                "file": "A Method/PrivEsc/Windows/Checklist.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Ligolo"
+              "title": "Checklist"
+            }
+          },
+          {
+            "id": "8adece762d9b4843",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Active Directory/3. SMB/3. SMB.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "3. SMB"
             }
           }
         ]
@@ -84,7 +129,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "runas",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -125,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OSCP/Privilege Escalation/Windows/Attacking OS/Vulnerable Services.md",
+                "file": "Vulnerabilities/XSS/Context/Between HTML tags.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +180,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Vulnerable Services"
+              "title": "Backlinks for Between HTML tags"
             }
           },
           {
@@ -144,12 +189,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/2. Enumerating Policies.md",
+                "file": "Vulnerabilities/XSS/Context/Between HTML tags.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 2. Enumerating Policies"
+              "title": "Outgoing links from Between HTML tags"
             }
           },
           {
@@ -173,13 +218,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/2. Enumerating Policies.md",
+                "file": "Vulnerabilities/XSS/Context/Between HTML tags.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2. Enumerating Policies"
+              "title": "Outline of Between HTML tags"
             }
           },
           {
@@ -193,11 +238,11 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 304.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -210,57 +255,59 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-local-images-plus:Local Images Plus  0.16.3\r\nLocalize attachments (plugin folder)": false
+      "obsidian-local-images-plus:Local Images Plus  0.16.3\r\nLocalize attachments (plugin folder)": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "0a7d3b6895c8ed2f",
+  "active": "e04121627b0a49d4",
   "lastOpenFiles": [
-    "A Method/Enum/$Enum.md",
-    "A Method/File Transfer/$File Transfer.md",
-    "A Method/Pivot/$Pivot.md",
-    "A Method/PrivEsc/Linux/$PATH/$$PATH.md",
-    "A Method/PrivEsc/Linux/Encrytion/$Encrytion.md",
-    "A Method/PrivEsc/Linux/File System/$File System.md",
-    "A Method/PrivEsc/Linux/Sudo/$Sudo.md",
-    "A Method/PrivEsc/Linux/Version/$Version.md",
-    "A Method/PrivEsc/Linux/$Linux.md",
-    "A Method/PrivEsc/Windows/Credentials/$Credentials.md",
-    "A Method/PrivEsc/Windows/$Windows.md",
-    "A Method/PrivEsc/$PrivEsc.md",
-    "A Method/$A Method.md",
-    "Active Directory/4. Kerberose/$4. Kerberose.md",
-    "Active Directory/5. DACL/$5. DACL.md",
-    "Active Directory/PowerShell/$PowerShell.md",
-    "Active Directory/Privilege Escalation/$Privilege Escalation.md",
-    "Active Directory/$Active Directory.md",
-    "HTB Academy/Active Directory/1. Setting The Stage/$1. Setting The Stage.md",
-    "HTB Academy/Active Directory/10. Why So Trusting?/$10. Why So Trusting?.md",
-    "HTB Academy/Active Directory/11. Breaking Down Boundaries/$11. Breaking Down Boundaries.md",
-    "HTB Academy/Active Directory/12. Defensive Considerations/$12. Defensive Considerations.md",
-    "HTB Academy/Active Directory/2. Initial Enumeration/$2. Initial Enumeration.md",
-    "HTB Academy/Active Directory/3. Sniffing out a Foothold/$3. Sniffing out a Foothold.md",
-    "HTB Academy/Active Directory/4. Sighting In, Hunting For A User/$4. Sighting In, Hunting For A User.md",
-    "HTB Academy/Active Directory/5. Spray Responsibly/$5. Spray Responsibly.md",
-    "Network/DNS",
-    "Network",
-    "INE/ewapt/Information Gathering/Active",
-    "Tools/Misc",
-    "INE/ewapt/Information Gathering/Passive",
-    "INE/ewapt/Information Gathering",
-    "INE/ewapt",
-    "INE",
-    "Web/1. Recone",
-    "Active Directory/Privilege Escalation",
-    "Z Assets/Images/Pasted image 20250819081407.jpeg",
-    "Z Assets/Images/Pasted image 20250819081407.png",
-    "Z Assets/Images/Pasted image 20250817212426.png",
-    "Z Assets/Images/Pasted image 20250817212324.jpeg",
-    "Z Assets/Images/Pasted image 20250817212324.png",
-    "Z Assets/Images/Pasted image 20250816120545.jpeg",
-    "Z Assets/Images/Pasted image 20250816120545.png",
-    "Z Assets/Images/Pasted image 20250816120509.jpeg",
-    "Z Assets/Images/Pasted image 20250816120509.png",
-    "Z Assets/Images/Pasted image 20250816120341.jpeg",
+    "Vulnerabilities/XSS/DOM based/CTF.md",
+    "Vulnerabilities/XSS/Context/DOM.md",
+    "Vulnerabilities/XSS/Context/template injection.md",
+    "Vulnerabilities/XSS/DOM based/2. Sinks.md",
+    "Vulnerabilities/XSS/Template injection",
+    "Vulnerabilities/XSS/DOM based/1. Explain.md",
+    "Vulnerabilities/XSS/Context/Inside tag attributes.md",
+    "Vulnerabilities/XSS/Context/JavaScript XSS.md",
+    "Vulnerabilities/XSS/Context/Between HTML tags.md",
+    "Vulnerabilities/XSS/DOM based/Untitled.md",
+    "Vulnerabilities/XSS/1. Ideas.md",
+    "Vulnerabilities/XSS/0. Detection.md",
+    "Active Directory/Privilege Escalation/Privileges/SeImpersonatePrivilege.md",
+    "HTB Labs/Windows/hard/DarkZero.md",
+    "Tools/Active directory/RunasCs.exe.md",
+    "HTB Academy/ADCS/Golden Certificate.md",
+    "Active Directory/0. Notes/1. Tips.md",
+    "Active Directory/0. Notes/0. Stuck.md",
+    "HTB Academy/Active Directory/1. Setting The Stage/Tools.md",
+    "Tools/mimikatz/mimikatz.md",
+    "HTB Academy/Privilege Escalation/Windows/Restricted Environments/UAC Bypass.md",
+    "HTB Academy/Privilege Escalation/Windows/User Privileges/SeDebugPrivilege.md",
+    "Tools/certipy/find.md",
+    "Tools/Impacket/changepasswd.py.md",
+    "A Method/Pivot/Ligolo/1. Simple.md",
+    "A Method/Pivot/Ligolo/2. Local Ports.md",
+    "A Method/File Transfer/SMB/upload.md",
+    "Tools/Active directory",
+    "Vulnerabilities/XSS/Context",
+    "Active Directory/z Basics",
+    "Active Directory/2. Spoofing",
+    "Technologies/Anguler",
+    "Vulnerabilities/DOM/Understand",
+    "Vulnerabilities/DOM",
+    "Vulnerabilities/XSS/DOM based",
+    "Vulnerabilities/Access",
+    "Z Assets/Images/Pasted image 20251006154010.jpeg",
+    "Z Assets/Images/Pasted image 20251006154010.png",
+    "Z Assets/Images/Pasted image 20251006153835.jpeg",
+    "Z Assets/Images/Pasted image 20251006153835.png",
+    "Z Assets/Images/Pasted image 20251004165934.jpeg",
+    "Z Assets/Images/Pasted image 20251004165934.png",
+    "Z Assets/Images/Pasted image 20251004040824.jpeg",
+    "Z Assets/Images/Pasted image 20251004040824.png",
+    "Z Assets/Images/Pasted image 20250930132533.jpeg",
+    "Z Assets/Images/Pasted image 20250930132533.png",
+    "Untitled.canvas",
     "HTB/linux/easy/Untitled.canvas",
     "Z Assets/Templates/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
     "Z Assets/Templates/Labs/Lab 1 - Example/LAB 1.canvas",
@@ -269,7 +316,6 @@
     "obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
     "obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas",
     "Z Assets/obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
-    "Z Assets/obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas",
-    "Untitled.canvas"
+    "Z Assets/obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas"
   ]
 }

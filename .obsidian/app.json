@@ -7,9 +7,10 @@
   "newFileLocation": "current",
   "newFileFolderPath": "Assets/Images",
   "pdfExportSettings": {
-    "pageSize": "A5",
+    "includeName": false,
+    "pageSize": "A4",
     "landscape": false,
-    "margin": "0",
+    "margin": "1",
     "downscalePercent": 100
   },
   "spellcheck": false,
