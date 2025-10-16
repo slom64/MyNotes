@@ -4,7 +4,6 @@ status: Active
 tags:
 aliases:
 ---
----
 
 # Information Gathering
 

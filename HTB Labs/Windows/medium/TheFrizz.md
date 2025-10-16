@@ -22,7 +22,7 @@ aliases:
 - gobuster
 
 
----
+
 
 # Information Gathering
 

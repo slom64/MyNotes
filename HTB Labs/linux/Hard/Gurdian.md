@@ -7,8 +7,6 @@ tags:
   - csrf
 aliases:
 ---
----
-
 # Information Gathering
 
 Scanned top TCP ports:

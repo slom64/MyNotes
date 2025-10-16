@@ -1,5 +1,3 @@
-
----
 # 🔹 ESC4 — Abuse of Template Permissions
 
 ### 1. What certificate templates are

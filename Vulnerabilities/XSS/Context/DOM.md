@@ -157,3 +157,4 @@ a\"-alert(1)}//
 - because of `this.responseText()`. we have string.
 - we did `"` --`"`-> `"searchTerm":"a\""}` --> But `"` got escaped so we put `\`-- `\"`--> `{"searchTerm":"a""}` --`\"-alert()`--> `"{searchTerm":"a"-alert()"}`
   we still have additional `"` at the end which make error, so we need to end the json and comment every thing --`\"alert()}//`--> `"{searchTerm":"a"-alert()} //"}`
+

@@ -1,6 +1,4 @@
 
----
-
 ## Web
 - [ ] Manual Insecure Deserialization
 

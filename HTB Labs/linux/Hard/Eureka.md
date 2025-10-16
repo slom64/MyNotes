@@ -27,7 +27,6 @@ aliases:
 - gobuster
 
 
----
 
 # Information Gathering
 

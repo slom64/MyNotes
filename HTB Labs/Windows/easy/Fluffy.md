@@ -209,3 +209,7 @@ evil-winrm -i 10.10.11.69  -u 'administrator'  -H 8da83a3fa618b6e3a00e93f676c92a
 ```
 
 GG
+
+```
+
+```

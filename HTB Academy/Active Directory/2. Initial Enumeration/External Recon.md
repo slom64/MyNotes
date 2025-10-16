@@ -1,6 +1,5 @@
 # External Recon and Enumeration Principles
 
----
 
 Before kicking off any pentest, it can be beneficial to perform `external reconnaissance` of your target. This can serve many different functions, such as:
 

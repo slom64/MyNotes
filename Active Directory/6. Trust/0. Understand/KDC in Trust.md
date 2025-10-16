@@ -1,11 +1,9 @@
 
----
-
 > [!Question] Question
 > What about the KDC, do we have different KDC for each subdomain which will serve by different realm? if that the case does that mean when i want to access resource from other domain. I do request TGT ticket from my subdomain then the DC redirect my request with my TGT using ticket to other domain?
 
 Yes 👌 you got it — that’s exactly how Kerberos works across domains in an AD forest. Let’s break it down carefully:
-## 1️⃣ KDCs per Domain
+## 1. KDCs per Domain
 
 - Each **domain** in Active Directory has its own **Domain Controllers (DCs)**.    
 - Each DC runs a **KDC (Key Distribution Center)** service.
@@ -18,7 +16,7 @@ So yes — **different subdomains = different KDCs = different Kerberos realms.*
 
 ---
 
-## 2️⃣ When You Access Resources in Your Own Domain
+## 2. When You Access Resources in Your Own Domain
 
 1. You log on to `emea.company.com`.
 2. You get a **TGT** from the **EMEA KDC**.
@@ -26,7 +24,7 @@ So yes — **different subdomains = different KDCs = different Kerberos realms.*
 
 ---
 
-## 3️⃣ When You Access Resources in _Another_ Domain
+## 3. When You Access Resources in _Another_ Domain
 
 This is where **trusts** + Kerberos **referrals** come in:
 1. You log on in `emea.company.com` → get TGT from **EMEA KDC**.
@@ -40,7 +38,7 @@ This is where **trusts** + Kerberos **referrals** come in:
 
 ---
 
-## 4️⃣ Real World Analogy
+## 4. Real World Analogy
 
 - Imagine you’re in **EMEA HQ bank** and want to access a service in the **APAC branch**.    
 - First, you get a pass (TGT) from EMEA HQ.
@@ -49,13 +47,13 @@ This is where **trusts** + Kerberos **referrals** come in:
 
 ---
 
-## 5️⃣ Across Forests
+## 5. Across Forests
 - Same idea, but now trusts are between **forest roots**.
 - If **SID filtering** and Kerberos cross-forest trusts are in place, the referral path goes from your domain → forest root → other forest root → target domain KDC.
 
 ---
 
-## ✅ TL;DR
+## TL;DR
 
 - Each domain = its own KDC / Kerberos realm.    
 - To access another domain’s resources:

@@ -1,6 +1,3 @@
-
----
-
 # Idea
 
 If you were able to get the `private key` of the CA then you can generate any certificate as you like.

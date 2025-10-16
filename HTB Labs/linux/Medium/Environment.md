@@ -24,9 +24,6 @@ aliases:
 - nmap
 - gobuster
 
-
----
-
 # Information Gathering
 
 Intial Nmap:
