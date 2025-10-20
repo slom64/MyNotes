@@ -1,7 +1,7 @@
-Got it 👍 You want to mount your HDD drive on Linux (Ubuntu, since that’s what you’re using). I’ll walk you through the steps:
+Got it  You want to mount your HDD drive on Linux (Ubuntu, since that’s what you’re using). I’ll walk you through the steps:
 
 ```
-sudo mount -t ntfs-3g /dev/sdb1 /mnt/HardDrive
+sudo mount -t ntfs-3g /dev/sda1 /mnt/HardDrive
 sudo ntfsfix /dev/sda1
 
 sudo umount /mnt/HardDrive
@@ -24,7 +24,7 @@ sda      ext4   root
 sdb1     ntfs   Data
 ```
 
-- `sda` → your main OS drive.    
+- `sda` → your main OS drive.
 - `sdb1` → your HDD partition.
 ---
 

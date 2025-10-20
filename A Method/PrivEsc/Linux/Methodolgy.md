@@ -1,0 +1,1 @@
+- check `env` variables like `SHELL=/usr/sbin/ash`.

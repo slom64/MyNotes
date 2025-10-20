@@ -1,19 +1,5 @@
 ```sh
-find /  -user miranda-wise -readable -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
-```
-
-```sh
-find / -user miranda-wise -perm -006 -type f 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/'
-```
-
-### Find Files Writable by a Specific User
-
-```sh
-find / -user username -writable 2>/dev/null
-```
-- Or (for older systems without `-writable`):
-```sh
-find / -user username -perm -u=w 2>/dev/null
+find / -type f -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/' #-readable 
 ```
 
 ### Find Files Writable by a Specific Group

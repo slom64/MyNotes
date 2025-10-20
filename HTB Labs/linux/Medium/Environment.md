@@ -7,7 +7,7 @@ tags:
   - laravel
 aliases:
 ---
-[[Vulnerabilities/File Upload/shells/php]]
+[[Web/File Upload/shells/php]]
 # Resolution summary
 
 >[!summary]
