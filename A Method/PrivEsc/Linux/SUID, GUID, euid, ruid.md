@@ -1,5 +1,10 @@
 - even when file has `SUID` that doesn't mean you will get root by just running it. You need to elevate your privileges inside the program by doing `setuid(0)` or `setgid`.
 - The `SUID` maybe given to the file using `capabilities` not directly by assigning it with `SUID`bit.
+```sh
+find / -perm -4000 -type f 2>/dev/null # SUID files
+find / -perm -2000 -type f 2>/dev/null # GUID files
+find / \( -perm -4000 -o -perm -2000 \) -type f 2>/dev/null # list both
+```
 
 ---
 ### User Identification Variables

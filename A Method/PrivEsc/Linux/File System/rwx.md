@@ -1,5 +1,8 @@
 ```sh
-find / -type f -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/' #-readable 
+find / -type f -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/' #-readable
+find / -perm -4000 -type f 2>/dev/null # SUID files
+find / -perm -2000 -type f 2>/dev/null # GUID files
+find / \( -perm -4000 -o -perm -2000 \) -type f 2>/dev/null # list both SUID and GUID
 ```
 
 ### Find Files Writable by a Specific Group
