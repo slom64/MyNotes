@@ -1,8 +1,23 @@
+`GenericAll` == `WriteDACL`
 the attack vector based on the **GenericAll** rights of a user over an OU relies on the ACL inheritance mechanism in Active Directory. When adding an ACE to a parent object in a domain, it is possible to specify that such an ACE should not only apply to the object itself, but also to all descendant objects. 
 
 As a result, a user having the **GenericAll** right (and thus **WriteDACL** permissions) over an OU could add a **FullControl** ACE to the OU and specify that this ACE should be inherited, **which will effectively lead to the compromise of all child objects since they will inherit said ACE**. As indicated by BloodHound, this can be performed through the **dacledit.py** tool on Linux (or **PowerView** on Windows).
 
+**Main Idea**: If inheritance flag isn't set while we have`GenericAll` on OU, we will create anther `GenericAll` that has inheritance flag set on. 
+```
+OU=SERVERS (Your original GenericAll - no inheritance)
+├── Computer=WEB01 ✗ (No access - inheritance blocked)
+├── Computer=DB01  ✗ (No access - inheritance blocked)  
+└── User=Admin     ✗ (No access - inheritance blocked)
 
+OU=SERVERS (After dacledit.py with inheritance)
+├── Computer=WEB01 ✓ (Now has access via inheritance)
+├── Computer=DB01  ✓ (Now has access via inheritance)
+└── User=Admin     ✓ (Now has access via inheritance)
+```
+
+---
+## Commands
 ```powershell
 
 New-GPO -Name "NewGPO" | New-GPLink -Target "OU=TargetOU,DC=FRIZZ,DC=HTB" -LinkEnabled YES

