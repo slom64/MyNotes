@@ -14,7 +14,7 @@
 # Fast explanation
 ## The main idea
 
-We want to move object from OU that we have low privilege on, to OU we have higher privilege on it. Example, if we have only `DeleteChildCreateChild` on OU_1 and we have `GenericAll` on OU_2. We want to move objects from OU_1 to OU_2 to have GenericAll on it.
+We want to move object from OU that we have low privilege on, to OU we have higher privilege on it. Example, if we have only `DeleteChildCreateChild` on OU_1 and we have `GenericAll` on OU_2. We want to move objects from OU_1 to OU_2 to have `GenericAll` on it.
 
 ---
 **NOTE**: we will explain with lab env example.
@@ -54,8 +54,7 @@ permission: CREATE_CHILD; WRITE
 
 ## Exploit
 
-We can have `GenericWrite` on `Security Department` by changing its `Distinguish name` to be as `Web Department`. and we can rename `Web Department` to anything else. So now we have `GenericWrite` on all users in `Security Department` OU.
-
+Now all what we need to do is moving `STEPHEN MILLER` from `security Department` to `Web Department`.
 ```sh
 # Move user from SECURITY DEPARTMENT ---To--> WEB DEPARTMENT
 ╭─LDAPS─[dc.hercules.htb]─[HERCULES\bob.w]-[NS:<auto>] [WEB] [CACHED]

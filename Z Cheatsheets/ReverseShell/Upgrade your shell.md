@@ -6,16 +6,22 @@ Most [netcat](../Tools/netcat.md)-like tools provide a non-interactive shell, wh
 # In reverse shell  
 $ python3 -c 'import pty; pty.spawn("/bin/bash")' or /usr/bin/script -qc /bin/bash /dev/null  
 Ctrl-Z  
-  
-# In Kali __ After getting reverse shell___ kill it   
+ 
 $ stty raw -echo; fg   
 // stty sane --> if things get break  
   
 # In reverse shell  
-$ reset  
-$ export SHELL=bash  
-$ export TERM=xterm-256color  
-$ stty rows 60 columns 200
+reset  
+export SHELL=bash  
+export TERM=xterm-256color  
+stty rows 60 columns 200
+
+# CRITICAL: Disable slow shell features
+unset PROMPT_COMMAND
+set +o history
+shopt -u histappend
+export HISTSIZE=0
+export HISTFILESIZE=0
 ```
 
 ## Python PTY

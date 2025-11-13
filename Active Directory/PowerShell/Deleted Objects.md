@@ -30,6 +30,12 @@ Set-ADAccountPassword -Identity cert_admin -Reset -NewPassword (ConvertTo-Secure
 ```
 
 
+```
 Get-ADObject -IncludeDeletedObjects -Filter "samAccountName -eq 'theuser'" ` -Properties whenDeleted,msDS-LastKnownParent,msDS-Recycled |  Format-List Name,SamAccountName,DistinguishedName,whenDeleted,msDS-LastKnownParent,msDS-Recycled
 
-Get-ADUser -Filter {SamAccountName -eq 'theuser'} -Properties Enabled,DistinguishedName |  Format-List SamAccountName,Enabled,DistinguishedName
+Get-ADUser -Filter {SamAccountName -eq 'todd.wolfe'} -Properties Enabled,DistinguishedName |  Format-List SamAccountName,Enabled,DistinguishedName
+```
+
+```
+Get-ADObject -IncludeDeletedObjects -Filter "samAccountName -eq 'todd.wolfe'" ` -Properties whenDeleted,msDS-LastKnownParent,msDS-Recycled |  Format-List Name,SamAccountName,DistinguishedName,whenDeleted,msDS-LastKnownParent,msDS-Recycled
+```

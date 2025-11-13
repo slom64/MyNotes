@@ -26,5 +26,12 @@ set RHOSTS 10.10.115.13
 set USER_FILE /usr/share/wordlists/metasploit/mysql_default_user.txt
 set PASS_FILE /usr/share/wordlists/metasploit/mysql_default_pass.txt
 run
+```
 
+```
+show databases;
+
+show tables; 
+
+SHOW COLUMNS FROM table_name;  or DESC table_name;
 ```
