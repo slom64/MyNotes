@@ -13,3 +13,8 @@ git status
 # Now commit the deletions
 git commit -m "Remove deleted vulnerability files"
 ```
+
+### repo size
+```sh
+git count-objects -vH
+```

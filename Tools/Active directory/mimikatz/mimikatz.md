@@ -1,3 +1,6 @@
+> [!Attention]
+> It is always a good idea to type "log" before running any commands in "Mimikatz" this way all command output will put output to a ".txt" file. This is especially useful when dumping credentials from a server which may have many sets of credentials in memory.
+
 ```powershell
 ### BUSYLIGHT Module
 

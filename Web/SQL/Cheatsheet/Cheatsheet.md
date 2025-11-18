@@ -95,12 +95,12 @@ You can use batched queries to execute multiple queries in succession. Note that
 
 You can cause a time delay in the database when the query is processed. The following will cause an unconditional time delay of 10 seconds.
 
-|   |   |
-|---|---|
-|Oracle|`dbms_pipe.receive_message(('a'),10)`|
-|Microsoft|`WAITFOR DELAY '0:0:10'`|
-|PostgreSQL|`SELECT pg_sleep(10)`|
-|MySQL|`SELECT SLEEP(10)`|
+|            |                                       |
+| ---------- | ------------------------------------- |
+| Oracle     | `dbms_pipe.receive_message(('a'),10)` |
+| Microsoft  | `WAITFOR DELAY '0:0:10'`              |
+| PostgreSQL | `SELECT pg_sleep(10)`                 |
+| MySQL      | `SELECT SLEEP(10)`                    |
 
 ## Conditional time delays
 

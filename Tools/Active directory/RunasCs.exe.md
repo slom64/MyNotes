@@ -1,7 +1,7 @@
 
 Some tools in windows doesn't accept getting executed from remote host, so we sometimes need to use RunasCs to make the computer thinks we are in local context.
 ```powershell
-.\RunasCs x x "command"   # use x x if you want to run the command using the current user context
+.\RunasCs x x "qwinsta" -l 9   # use x x if you want to run the command using the current user context, YOU SHOULD PUT LOGON TYPE 9
 ```
 
 ```powershell

