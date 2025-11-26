@@ -1,5 +1,5 @@
 
-In blood hound If this set to fasle that mean we can do delegation to this user. 
+In bloodhound If this set to false that mean we can do delegation to this user. 
 ![[Z Assets/Images/Pasted image 20251113083405.jpeg]]
 
 But in powershell, with `AccountNotDelegated` = false. if it was True then we can't use delegation to impersionate this user.

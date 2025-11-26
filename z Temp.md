@@ -3,5 +3,5 @@ SELECT CAST(BulkColumn AS VARCHAR(MAX)) as FileContent FROM OPENROWSET(BULK 'C:\
 ```
 
 ```
-a83b750679b1789e29e966d06c7e41f7
+
 ```

@@ -73,6 +73,7 @@ We have 2 interesting ports which are `4222` --> nats, `2049` --> nfs share.
 
 mount the port `2049`.
 ```sh
+
 sudo mount -t nfs 10.10.11.78:/MirageReports /home/slom/HTB/windows/hard/Mirage/mnt -o nolock,vers=3
 ```
 

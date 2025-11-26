@@ -25,13 +25,26 @@ Cmdlets for high-level domain/forest enumeration.
 ## 2. User Enumeration
 Cmdlets for querying user accounts.
 
-| Cmdlet | Description | Example |
-|--------|-------------|---------|
-| `Get-ADUser` | Retrieves user objects. Use `-Properties *` for all attributes. | `Get-ADUser -Filter * -Properties * \| Select SamAccountName, GivenName, Surname, Enabled, LastLogon` |
-| `Get-ADUser -SearchBase` | Search in a specific OU. | `Get-ADUser -Filter "Name -like '*service*'" -SearchBase "OU=Users,DC=example,DC=com"` |
-| `Search-ADAccount` | Finds accounts by criteria like locked, expired, inactive. | `Search-ADAccount -AccountInactive -TimeSpan 90.00:00:00 \| Select Name, LastLogonDate` |
-| `Get-ADUser -LDAPFilter` | Advanced LDAP queries. | `Get-ADUser -LDAPFilter "(& (objectClass=user)(servicePrincipalName=*))" \| Select Name, servicePrincipalName` (for Kerberoastable users) |
-| `Get-ADAccountAuthorizationGroup` | Gets groups a user is effectively member of (including nested). | `Get-ADAccountAuthorizationGroup -Identity username` |
+| Cmdlet                            | Description                                                     | Example                                                                                                                                   |
+| --------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Get-ADUser`                      | Retrieves user objects. Use `-Properties *` for all attributes. | `Get-ADUser -Filter * -Properties * \| Select SamAccountName, GivenName, Surname, Enabled, LastLogon`                                     |
+| `Get-ADUser -SearchBase`          | Search in a specific OU.                                        | `Get-ADUser -Filter "Name -like '*service*'" -SearchBase "OU=Users,DC=example,DC=com"`                                                    |
+| `Search-ADAccount`                | Finds accounts by criteria like locked, expired, inactive.      | `Search-ADAccount -AccountInactive -TimeSpan 90.00:00:00 \| Select Name, LastLogonDate`                                                   |
+| `Get-ADUser -LDAPFilter`          | Advanced LDAP queries.                                          | `Get-ADUser -LDAPFilter "(& (objectClass=user)(servicePrincipalName=*))" \| Select Name, servicePrincipalName` (for Kerberoastable users) |
+| `Get-ADAccountAuthorizationGroup` | Gets groups a user is effectively member of (including nested). | `Get-ADAccountAuthorizationGroup -Identity username`                                                                                      |
+```ldap
+$searcher = New-Object System.DirectoryServices.DirectorySearcher
+$searcher.Filter = "(&(objectCategory=person)(objectClass=user))"
+$searcher.PageSize = 1000
+$results = $searcher.FindAll()
+
+foreach ($result in $results) {
+    $username = $result.Properties["samaccountname"][0]
+    $displayName = $result.Properties["displayname"][0]
+    $email = $result.Properties["mail"][0]
+    Write-Output "$username | $displayName | $email"
+}
+```
 
 ## 3. Group Enumeration
 Cmdlets for groups and memberships.
@@ -90,10 +103,30 @@ Cmdlets for policies and sensitive account data.
 ## 9. Service Principal Names (SPNs)
 Useful for Kerberoasting enumeration.
 
-| Cmdlet | Description | Example |
-|--------|-------------|---------|
-| `Get-ADUser -Properties servicePrincipalName` | Users with SPNs. | `Get-ADUser -Filter {servicePrincipalName -like "*"} -Properties servicePrincipalName \| Select Name, servicePrincipalName` |
+| Cmdlet                                            | Description          | Example                                                                                                                         |
+| ------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `Get-ADUser -Properties servicePrincipalName`     | Users with SPNs.     | `Get-ADUser -Filter {servicePrincipalName -like "*"} -Properties servicePrincipalName \| Select Name, servicePrincipalName`     |
 | `Get-ADComputer -Properties servicePrincipalName` | Computers with SPNs. | `Get-ADComputer -Filter {servicePrincipalName -like "*"} -Properties servicePrincipalName \| Select Name, servicePrincipalName` |
+|                                                   |                      |                                                                                                                                 |
+```
+# LDAP search + powershel for SPNs
+$searcher = New-Object System.DirectoryServices.DirectorySearcher
+$searcher.Filter = "(servicePrincipalName=*)"
+$searcher.PropertiesToLoad.Add("servicePrincipalName")
+$searcher.PropertiesToLoad.Add("sAMAccountName")
+$searcher.PropertiesToLoad.Add("name")
+$searcher.PropertiesToLoad.Add("userAccountControl")
+
+$results = $searcher.FindAll()
+foreach ($result in $results) {
+    $spns = $result.Properties["servicePrincipalName"]
+    $user = $result.Properties["sAMAccountName"][0]
+    foreach ($spn in $spns) {
+        Write-Host "$user : $spn"
+    }
+}
+```
+
 
 ## 10. Advanced Queries and Tips
 - **Delegation Enumeration:** For constrained/unconstrained delegation.

