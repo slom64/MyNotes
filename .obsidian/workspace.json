@@ -13,6 +13,21 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "Active Directory/4. Kerberose/9. Pass-the-Ticket.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "9. Pass-the-Ticket"
+            }
+          },
+          {
+            "id": "d5e64cd083ed8eb7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "Technologies/git/git.md",
                 "mode": "source",
                 "source": false,
@@ -28,17 +43,17 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Active directory/mimikatz/mimikatz.md",
+                "file": "Tools/Active directory/bloodhound/bloodyAD/0. bloodyAD usage.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mimikatz"
+              "title": "0. bloodyAD usage"
             }
           },
           {
-            "id": "4eb89310275283d2",
+            "id": "69b1b5135a3b3d97",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -53,96 +68,22 @@
             }
           },
           {
-            "id": "bbdcf8adc2f83253",
+            "id": "91fdf19cb253627c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Relay/Responder.md",
+                "file": "Technologies/Docker/Misc/Docker subnet Conflict.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Responder"
-            }
-          },
-          {
-            "id": "8adece762d9b4843",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTB Academy/Kerberos/6.Constraind Delegation.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "6.Constraind Delegation"
-            }
-          },
-          {
-            "id": "f3960d32b7b61299",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTB Academy/Kerberos/7.RBCD.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "7.RBCD"
-            }
-          },
-          {
-            "id": "e04121627b0a49d4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTB Academy/Kerberos/9.Pass-the-Ticket.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "9.Pass-the-Ticket"
-            }
-          },
-          {
-            "id": "88224f6663c878f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTB Academy/CAPE/ADCS/6 Miscellaneous ADCS Attacks/2. PKINIT.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "2. PKINIT"
-            }
-          },
-          {
-            "id": "780e7fa0887e5629",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tools/Active directory/RunasCs.exe.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "RunasCs.exe"
+              "title": "Docker subnet Conflict"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -174,7 +115,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "smb",
+                "query": "git",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -304,54 +245,54 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "af48dc6c06f63411",
+  "active": "d5e64cd083ed8eb7",
   "lastOpenFiles": [
-    "A Method/File Transfer/SMB/upload.md",
-    "A Method/File Transfer/SMB/download.md",
-    "A Method/File Transfer/SMB/1. SMB.md",
-    "Active Directory/5. DACL/OU/Understand/1. GPO.md",
-    "Active Directory/0. Notes/0. Stuck.md",
-    "Active Directory/1. Enum/1. Enum.md",
-    "Active Directory/0. Notes/2. Methodology.md",
-    "Active Directory/3. SMB/SMB Windows.md",
-    "A Method/PrivEsc/Windows/2 User privilege/SeImpersonate & SeAssignPrimaryToken.md",
-    "Z Cheatsheets/ReverseShell/Windows.md",
-    "Active Directory/2. Spoofing/2. Spoofing.md",
-    "Active Directory/8. Services/1. MSSQL.md",
-    "A Method/PrivEsc/Windows/2 User privilege/1. Enumeration.md",
-    "Active Directory/1. Enum/NTLM Reflection.md",
-    "Active Directory/1. Enum/Timeroasting.md",
-    "Active Directory/1. Enum/IPC$.md",
-    "Active Directory/1. Enum/SYSVOL.md",
-    "A Method/PrivEsc/Windows/1 Enumeration/Named pipes.md",
-    "A Method/PrivEsc/Windows/1 Enumeration/1. Services.md",
-    "A Method/PrivEsc/Windows/1 Enumeration/Resources.md",
-    "A Method/PrivEsc/Windows/3 Group Privilege/1. Enumeration.md",
-    "A Method/PrivEsc/Windows/3 Group Privilege/Event Log Readers.md",
-    "A Method/PrivEsc/Windows/1 Enumeration/2. Programs.md",
-    "A Method/PrivEsc/Windows/1 Enumeration/3. env variable.md",
-    "OS Windows/Windows Cheatsheet.md",
-    "A Method/PrivEsc/Windows/2 User privilege",
-    "A Method/PrivEsc/Windows/1 Enumeration",
-    "Tools/Active directory/mimikatz/mimikatz.md",
-    "Active Directory/5. DACL/Protected",
-    "A Method/PrivEsc/Windows/3 Group Privilege",
+    "Technologies/git/git CheatSheet.md",
+    "Technologies/git/git.md",
+    "index.md",
+    "Z ToDo.md",
+    "z Temp.md",
+    "Tools/Active directory/bloodhound/bloodhound-ce-python/0. Usage.md",
+    "Active Directory/ADCS Custom/Undersatnd/Mapping.md",
+    "Active Directory/ADCS Custom/Undersatnd/Authorized signature.md",
+    "Active Directory/ADCS Custom/Undersatnd",
+    "Active Directory/ADCS Custom/Golden Certificate.md",
+    "Active Directory/ADCS Custom/ESC9.md",
+    "Active Directory/ADCS Custom/ESC7.md",
+    "Active Directory/ADCS Custom/ESC6.md",
+    "Active Directory/ADCS Custom/ESC4.md",
+    "Active Directory/ADCS Custom/ESC3.md",
+    "Active Directory/ADCS Custom/ESC2.md",
+    "Active Directory/ADCS Custom/ESC10.md",
+    "Active Directory/ADCS Custom/ESC1.md",
+    "Active Directory/ADCS Custom",
+    "Tools/Active directory/bloodhound/start.md",
+    "Technologies/Docker/Misc/Docker subnet Conflict.md",
+    "Technologies/Docker/Certificate Authentication.md",
+    "Labs/HTB/Windows/hard/Fries.md",
+    "Operating Systems/Linux/Efficiency/Execute On New Proccess.md",
+    "Tools/Relay/Responder.md",
+    "Active Directory/4. Kerberose/9. Pass-the-Ticket.md",
+    "Services/nfs/nfs.md",
+    "A Method/ReverseShell/Upgrade your shell.md",
+    "Operating Systems",
+    "Services/nfs",
+    "A Method/Recone/C",
+    "Technologies/Web Tech",
+    "Escalating Privileges/Linux/GTFOBins",
+    "Labs",
+    "A Method/PrivEsc/Windows/Services/Untitled",
+    "Escalating Privileges/Windows/5 Services",
+    "Z Assets/Images/Pasted image 20251123015255.jpeg",
+    "Z Assets/Images/Pasted image 20251123015255.png",
+    "Z Assets/Images/Pasted image 20251115072800.jpeg",
+    "Z Assets/Images/Pasted image 20251115072800.png",
+    "Z Assets/Images/ad6972e7a5eb3717e11d39544d881cc8_MD5.png",
+    "Z Assets/Images/Pasted image 20251113083405.jpeg",
+    "Z Assets/Images/Pasted image 20251113083405.png",
     "Z Assets/Images/Pasted image 20251108075054.jpeg",
     "Z Assets/Images/Pasted image 20251108075054.png",
-    "A Method/File Transfer/Untitled",
     "Z Assets/Images/Pasted image 20251105034126.jpeg",
-    "Z Assets/Images/Pasted image 20251105034126.png",
-    "Z Assets/Images/Pasted image 20251105024112.jpeg",
-    "Z Assets/Images/Pasted image 20251105024112.png",
-    "Technologies/Servlet Containers",
-    "Web/CMS/WordPress",
-    "Web/CMS",
-    "Technologies/Languages",
-    "HTB Academy/Web/Untitled",
-    "Z Assets/Images/e01adf84f0c6e39bcc363d430622edaf_MD5.jpg",
-    "Z Assets/Images/90d45160a51297f0915c74c8ff108cd5_MD5.jpg",
-    "Z Assets/Images/e814db7b6cbf712b2485b90b0802f086_MD5.jpg",
-    "Z Assets/Images/e2593294583f02f1f06a5fb8e59a8dfe_MD5.jpg",
     "Untitled.canvas",
     "HTB/linux/easy/Untitled.canvas",
     "Z Assets/Templates/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
