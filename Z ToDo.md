@@ -6,14 +6,3 @@
 ## Web
 - [ ] Manual Insecure Deserialization
 
----
-## Red teaming
-- [x] Certificates
-- [x] Active Directory
-- [ ] Windows privilege Escelation
-
----
-## Boxes
-- [x] nocturnal
-- [x] cap
-
