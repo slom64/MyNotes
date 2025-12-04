@@ -109,7 +109,7 @@ Useful for Kerberoasting enumeration.
 | `Get-ADComputer -Properties servicePrincipalName` | Computers with SPNs. | `Get-ADComputer -Filter {servicePrincipalName -like "*"} -Properties servicePrincipalName \| Select Name, servicePrincipalName` |
 |                                                   |                      |                                                                                                                                 |
 ```
-# LDAP search + powershel for SPNs
+# LDAP search + powershell for SPNs
 $searcher = New-Object System.DirectoryServices.DirectorySearcher
 $searcher.Filter = "(servicePrincipalName=*)"
 $searcher.PropertiesToLoad.Add("servicePrincipalName")

@@ -1,4 +1,4 @@
-# 🔹 ESC4 — Abuse of Template Permissions
+# ESC4 — Abuse of Template Permissions
 
 ### 1. What certificate templates are
 - Templates = **blueprints** in AD CS that define _how a certificate should be issued_:

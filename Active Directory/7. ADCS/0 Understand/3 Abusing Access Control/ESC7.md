@@ -1,4 +1,4 @@
-# 🔹 ESC7 — Vulnerable Certificate Authority Access Control
+# ESC7 — Vulnerable Certificate Authority Access Control
 
 ### 1. The CA itself has permissions
 

@@ -1,3 +1,19 @@
+Mapping could be:
+- explicit
+- implicit
+	- Kerberos mapping `StrongCertificateBindingEnforcement`
+		- `0`: no strong certificate mapping is realised. The `szOID_NTDS_CA_SECURITY_EXT` extension is not check and the authentication behavior is similar to what was done before the patch. This is the "Disabled mode". This option can't be enabled anymore.
+		- `1`: default value after the patch. The KDC checks if the explicit certificate mapping is present (strong mapping). If yes, the authentication is allowed; if no, it checks if the certificate security extension is present and validate it. If it is not present, the authentication can be allowed if the user account predates the certificate. This is the "Compatibility mode"
+		- `2`: the KDC checks if the explicit certificate mapping is present (strong mapping). If yes, the authentication is allowed; if no, it checks if the certificate security extension is present and validate it. If it is not present, the authentication is refused. This is the "Full Enforcement mode"
+	- Schannel mapping`CertificateMappingMethods`
+		- `0x0001`: Subject/issuer explicit mapping
+		- `0x0002`: Issuer explicit mapping
+		- `0x0004`: SAN implicit mapping. "This one alone is danger"
+		- `0x0008`: S4USelf implicit Kerberos mapping
+		- `0x0010`: S4USelf explicit Kerberos mapping
+		- The current default value is `0x18` (`0x8` and `0x10`). Schannel doesn't directly support the `szOID_NTDS_CA_SECURITY_EXT` security extension, but it can utilize it by "converting" the Schannel certificate mapping to a Kerberos certificate mapping using S4USelf. The mapping process will then be performed as explained in the Kerberos mapping section.
+
+---
 # 🧩 What is “Certificate Mapping” in AD CS?
 
 In Active Directory, a **certificate** is basically just a key + identity. But when you present a certificate to authenticate, the DC (Domain Controller / KDC) needs to answer a critical question:
@@ -53,7 +69,6 @@ This was **CVE-2022-26923 (Certifried)**.
 ## 🔒 Microsoft’s fix: `szOID_NTDS_CA_SECURITY_EXT`
 
 To close this hole, Microsoft added a new extension to certs issued by AD CS:
-
 - **`szOID_NTDS_CA_SECURITY_EXT`** → contains the AD object’s **SID** at the time of enrollment.    
 - So now when you present a cert, the DC checks:
     - Does this SID match the actual account?
@@ -453,8 +468,51 @@ Used when a TLS server requests a client certificate (IIS, LDAPS, mutual TLS, et
 - **TLS 1.2:** certs in clear; **TLS 1.3:** certs encrypted.
 ---
 
-If you want, I can now:
-- show a compact ASCII diagram for both flows, or
-- walk through a concrete example (e.g., client cert with UPN vs cert with SID extension and how KDC reacts in compatibility vs full enforcement).
 
-Which would help you understand it best?
+> [!Question] 
+> so certificate mapping happens when like the user try to authenticate using his certificate, then the KDC checks the certificate is valid then it looks at the sid to do mapping to account based on it (when implicit mapping is used), and what make this better than the older implementation (before certifried) is that the server will append the right sid of the user and won't trust the upn of the user
+
+Yes, that's a solid grasp of the process—I'll refine and expand on it based on how certificate mapping works in Active Directory Certificate Services (ADCS), especially post-Certifried (CVE-2022-26923). I'll break it down step by step, including why the newer implementation is more secure. Note that as of December 2025, we're fully in "Full Enforcement" mode for these mappings (per Microsoft's updates: Disabled mode was phased out in April 2023, Compatibility mode ended in September 2025, and everything now defaults to strict enforcement).
+
+### When and How Certificate Mapping Happens
+Certificate mapping occurs during the authentication phase, specifically when a user (or machine) presents a certificate to authenticate to the domain—e.g., via Kerberos (for things like obtaining a Ticket-Granting Ticket or TGT) or Schannel (for TLS-based services like LDAPS). The Key Distribution Center (KDC) on the domain controller handles Kerberos auth, while Schannel handles TLS/SSL scenarios but often delegates to Kerberos via S4U (Services for User).
+
+Here's the high-level flow:
+1. **Certificate Validation First**: The KDC (or Schannel) checks if the certificate is inherently valid. This includes:
+   - Verifying the signature and chain back to a trusted root CA.
+   - Checking revocation status (via CRL/OCSP).
+   - Ensuring it's within its validity period and has appropriate EKUs (e.g., Client Authentication).
+   If it fails here, auth is denied—no mapping even attempted.
+
+2. **Mapping the Certificate to an AD Account**: Once validated, the system needs to link the cert to a specific AD object (user or computer). This is where mapping comes in, and it can be explicit or implicit:
+   - **Explicit Mapping**: The cert's details (e.g., issuer + serial number) must exactly match an entry in the AD object's `altSecurityIdentities` attribute. This is admin-configured and doesn't rely on the cert's contents beyond basic identifiers.
+   - **Implicit Mapping** (what you're focusing on): No `altSecurityIdentities` entry needed. Instead, the system uses info embedded in the cert (like SAN fields or the SID extension) to look up the matching AD account.
+
+   In implicit mapping under modern enforcement:
+   - The KDC prioritizes the SID from the `szOID_NTDS_CA_SECURITY_EXT` extension (OID: 1.3.6.1.4.1.311.25.2).
+   - It extracts the SID and queries AD for a matching `objectSid` on a user/computer object.
+   - If it matches, mapping succeeds, and auth proceeds (granting tickets based on that identity's privileges).
+   - If no SID extension or it doesn't match, it falls back to explicit mapping (if present) or other strong methods—but in Full Enforcement mode (current as of 2025), weak implicit mappings (e.g., just UPN or DNS) are rejected outright.
+
+This happens transparently during auth attempts—no separate "mapping request" step.
+
+### Why the Post-Certifried Implementation Is Better
+The older implementation (pre-May 2022 patch for CVE-2022-26923) relied heavily on weak implicit mappings, which were vulnerable. Here's the contrast:
+
+- **Old Way (Pre-Certifried/Weak Mappings)**:
+  - Implicit mapping trusted user-supplied or easily spoofable info in the cert's SAN, like UPN (e.g., user@domain.com) or DNS name (e.g., host.domain.com).
+  - The KDC would parse the SAN, search AD for a matching `userPrincipalName` (for users) or derive a `sAMAccountName` (e.g., appending "$" for machines), and map accordingly.
+  - Problem: If a certificate template allowed the enrollee to specify arbitrary SANs (e.g., via `CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT_ALT_NAME`), an attacker could request a cert with a spoofed UPN/DNS mimicking a privileged account (like a domain admin). The KDC would trust it without verifying the requester's true identity, enabling impersonation (core of exploits like Certifried or ESC1).
+  - No built-in way to enforce "who really requested this?"—it was all based on the cert's self-reported details.
+
+- **New Way (Post-Certifried/Strong Mappings with SID Extension)**:
+  - The CA (during issuance) automatically embeds the requester's actual `objectSid` from AD into the cert via the SID extension. This happens only for enterprise CAs integrated with AD—the CA queries AD for the enrollee's SID and adds it, so it's not user-supplied or forgeable.
+  - During auth, the KDC extracts and validates this SID directly against AD, ensuring the cert maps only to the exact account that requested it.
+  - Even if the SAN has a UPN/DNS, the SID takes precedence in enforcement modes. Weak mappings (relying solely on UPN/DNS) are ignored or fail in Full Enforcement.
+  - Security wins:
+    - **Anti-Spoofing**: SIDs are unique, non-reusable, and domain-assigned—not something an attacker can fake in a request. Unlike UPNs, which can be arbitrary strings in misconfigured templates.
+    - **No Trust in User Input**: The CA enforces the SID based on the authenticated enrollee's identity (via NTLM/Kerberos during enrollment), so even if SAN is enrollee-supplied, the SID overrides it for mapping.
+    - **Backdating Protection**: The system can check if the cert predates the account (flagging potential fakes), with no fallbacks in Full Enforcement.
+    - **Broader Coverage**: Addresses CVEs like 2022-26923 (Certifried), 2022-26931, and 2022-34691 by mandating strong bindings, reducing risks in VPN, Wi-Fi, or smart card auth.
+
+In short, the old system was like trusting a self-declared ID on a badge; the new one is like embedding a verifiable, tamper-proof biometric (the SID) that the issuer (CA) stamps based on AD records. This shift makes attacks much harder, as exploiting templates alone isn't enough—you can't bypass the SID check. If your environment still has legacy certs without SIDs, they'd fail auth now, so re-issuance with modern templates is key.

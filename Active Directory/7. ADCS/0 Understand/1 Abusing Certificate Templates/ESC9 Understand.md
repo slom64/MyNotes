@@ -1,4 +1,6 @@
-Mapping
+There is special flag in`msPKI-Enrollment-Flag` which is **`CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT`** (value: `0x00000001`), this flag grante the user the rights to change the UPN and the CA won't check the SID which mean it disable the `szOID_NTDS_CA_SECURITY_EXT` extension.
+
+---
 
 > [!question]
 > cool now lets start with ESC9. it lavarege the flaw of msPKI-Enrollment-Flag which override StrongCertificateBindingEnforcement so we can change the UPN and the CA will take in consideration the request UPN

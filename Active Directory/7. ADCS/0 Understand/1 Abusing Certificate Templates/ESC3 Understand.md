@@ -1,3 +1,5 @@
+Its same as `ESC2` but the difference is ESC2 has `AnyPurpos` EKU which mean it has has implicitly the OID of Enrollment Agent EKU. So ESC3 has less EKU but has the same attack path as ESC2.
+
 ESC3 , is to abuse Misconfigured `Enrollment Agent Templates `, which bears similarities to ESC1 and ESC2 . However, it involves exploiting a different Extended Key Usage (EKU) and necessitates an additional step to carry out the abuse.
 
 # Understand 

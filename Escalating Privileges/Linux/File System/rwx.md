@@ -1,6 +1,7 @@
 ```sh
 find / -type f -readable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/|/usr/|/boot/|/var/cache/|/var/spool/|/var/lib/|/etc/|/snap/' #-readable
 find / -writable 2>/dev/null | grep -v -E '/proc/|/run/|/sys/|/dev/|/snap/'
+find / -type f -executable -gid 1001 2>/dev/null
 find / -perm -4000 -type f 2>/dev/null | grep -v -E '/snap/' # SUID files
 find / -perm -2000 -type f 2>/dev/null # GUID files
 find / \( -perm -4000 -o -perm -2000 \) -type f 2>/dev/null # list both SUID and GUID

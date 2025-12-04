@@ -1,0 +1,4 @@
+- ESC1: attacker can supply the `SubjectAltName`
+- ESC2: We have access to `AnyPurpos` certificate. which mean it has implicit `Enrollment agent OID`.
+- ESC3: We have access to certificate that has `Enrollment agent` OID.
+- ESC9: certificate that has `msPKI-Enrollment-Flag: CT_FLAG_NO_SECURITY_EXTENSION` which disable `szOID_NTDS_CA_SECURITY_EXT` make us fall back before certifried and request fake UPN.
