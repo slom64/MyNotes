@@ -3,8 +3,9 @@ They matter a lot for lateral movement, constrained delegation, and credential e
 
 Below is an **Attack-Focused Cheat Breakdown**:
 
-Things that works with rubeus.exe: 9
-things didn't work: 8
+Things that works with rubeus.exe
+- `9`:Keep in mind. You can change the TGT ticket and inject newer ones for another users in this logon session, but in the start you can't `.\Rubeus.exe x x powershell -l 9`. you can't specify username and password of other user, the logon session will be in the same context of the user you have called Rubeus with. 
+things didn't work: 8,3
 
 ---
 

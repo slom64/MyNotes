@@ -99,6 +99,10 @@ $Results | Sort-Object Description, TargetDN | Format-Table -Wrap -AutoSize
 
 ### Change password of an account
 ```powershell
+
+
+net user user2 "Newpassword123!" /domain #tested
+_______________________ or
 Import-Module ActiveDirectory
 
 $User   = "user2"                    # target samAccountName or DN or UPN
@@ -146,13 +150,16 @@ $User.psbase.Invoke("SetPassword", $NewPass)   # simple version (requires rights
 $User.Put("unicodePwd", $UnicodePass)
 $User.SetInfo()
 ___________ or 
-net user user2 "Newpassword123!" /domain
+
 ```
 
 
 ---
 ### Change UPN of account
 ```powershell
+dsmod user "CN=user2,OU=Users,DC=lab,DC=local" -upn "user3@lab.local" # tested
+__________ or
+
 Import-Module ActiveDirectory
 
 Set-ADUser -Identity user2 -UserPrincipalName "user3@lab.local" -Verbose
@@ -170,5 +177,5 @@ ________________________or
 # ldap
 ([ADSI]"LDAP://CN=user2,OU=Users,DC=lab,DC=local").Put("userPrincipalName", "user3@lab.local").SetInfo()
 _______________________or
-dsmod user "CN=user2,OU=Users,DC=lab,DC=local" -upn "user3@lab.local"
+
 ```
