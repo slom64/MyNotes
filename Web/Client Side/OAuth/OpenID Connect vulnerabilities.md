@@ -12,7 +12,7 @@ The OpenID specification outlines a standardized way of allowing client applicat
 
 In the request body, the client application submits key information about itself in JSON format. For example, it will often be required to include an array of whitelisted redirect URIs. It can also submit a range of additional information, such as the names of the endpoints they want to expose, a name for their application, and so on. A typical registration request may look something like this:
 
-you may find it in `/.well-known/openid-configuration`
+you may find it in `/.well-known/openid-configuration`,`/openid/register`
 
 ```http
 POST /openid/register HTTP/1.1
