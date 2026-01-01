@@ -128,5 +128,13 @@
       "modifiers": [],
       "key": "F2"
     }
+  ],
+  "editor:set-heading-4": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "4"
+    }
   ]
 }

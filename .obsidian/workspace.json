@@ -8,33 +8,48 @@
         "type": "tabs",
         "children": [
           {
-            "id": "af48dc6c06f63411",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Active Directory/4. Kerberose/9. Pass-the-Ticket.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "9. Pass-the-Ticket"
-            }
-          },
-          {
             "id": "d5e64cd083ed8eb7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technologies/git/git.md",
+                "file": "Web/XSS/Context/DOM.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "git"
+              "title": "DOM"
+            }
+          },
+          {
+            "id": "4e92186e70d5945e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Web/File Upload/Ideas/phar_in_image.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "phar_in_image"
+            }
+          },
+          {
+            "id": "465a5a69cf15b9f5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Z ToDo.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Z ToDo"
             }
           },
           {
@@ -43,22 +58,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Active directory/bloodhound/bloodyAD/0. bloodyAD usage.md",
+                "file": "Labs/HackSmarter/Odyssey.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "0. bloodyAD usage"
+              "title": "Odyssey"
             }
           },
           {
-            "id": "69b1b5135a3b3d97",
+            "id": "91fdf19cb253627c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "A Method/PrivEsc/Linux/File System/rwx.md",
+                "file": "Escalating Privileges/Linux/File System/rwx.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
@@ -68,18 +83,18 @@
             }
           },
           {
-            "id": "91fdf19cb253627c",
+            "id": "8cfee23fe70a2bf8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technologies/Docker/Misc/Docker subnet Conflict.md",
+                "file": "Technologies/Languages/JavaScript/postMessage.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Docker subnet Conflict"
+              "title": "postMessage"
             }
           }
         ],
@@ -115,7 +130,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "git",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -191,7 +206,7 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
@@ -204,13 +219,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HTB Labs/Windows/insane/Hercules.md",
+                "file": "Web/Insecure deserialization/Understand/0. Understand Insecure deserialization.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Hercules"
+              "title": "Outline of 0. Understand Insecure deserialization"
             }
           },
           {
@@ -224,7 +239,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -245,54 +260,55 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "d5e64cd083ed8eb7",
+  "active": "79bb53e617f949fa",
   "lastOpenFiles": [
-    "Technologies/git/git CheatSheet.md",
-    "Technologies/git/git.md",
-    "index.md",
-    "Z ToDo.md",
-    "z Temp.md",
-    "Tools/Active directory/bloodhound/bloodhound-ce-python/0. Usage.md",
-    "Active Directory/ADCS Custom/Undersatnd/Mapping.md",
-    "Active Directory/ADCS Custom/Undersatnd/Authorized signature.md",
-    "Active Directory/ADCS Custom/Undersatnd",
-    "Active Directory/ADCS Custom/Golden Certificate.md",
-    "Active Directory/ADCS Custom/ESC9.md",
-    "Active Directory/ADCS Custom/ESC7.md",
-    "Active Directory/ADCS Custom/ESC6.md",
-    "Active Directory/ADCS Custom/ESC4.md",
-    "Active Directory/ADCS Custom/ESC3.md",
-    "Active Directory/ADCS Custom/ESC2.md",
-    "Active Directory/ADCS Custom/ESC10.md",
-    "Active Directory/ADCS Custom/ESC1.md",
-    "Active Directory/ADCS Custom",
-    "Tools/Active directory/bloodhound/start.md",
-    "Technologies/Docker/Misc/Docker subnet Conflict.md",
-    "Technologies/Docker/Certificate Authentication.md",
-    "Labs/HTB/Windows/hard/Fries.md",
+    "Web/G",
+    "Web/Insecure deserialization/2. Notes.md",
+    "Web/Insecure deserialization/1. Ideas Insecure Deserialization.md",
+    "Tools/web/phpggc.md",
+    "Web/File Upload/Ideas/phar_in_image.md",
+    "Web/SQL/Cheatsheet/Cheatsheet.md",
     "Operating Systems/Linux/Efficiency/Execute On New Proccess.md",
-    "Tools/Relay/Responder.md",
-    "Active Directory/4. Kerberose/9. Pass-the-Ticket.md",
-    "Services/nfs/nfs.md",
-    "A Method/ReverseShell/Upgrade your shell.md",
-    "Operating Systems",
-    "Services/nfs",
-    "A Method/Recone/C",
-    "Technologies/Web Tech",
-    "Escalating Privileges/Linux/GTFOBins",
-    "Labs",
-    "A Method/PrivEsc/Windows/Services/Untitled",
-    "Escalating Privileges/Windows/5 Services",
-    "Z Assets/Images/Pasted image 20251123015255.jpeg",
-    "Z Assets/Images/Pasted image 20251123015255.png",
-    "Z Assets/Images/Pasted image 20251115072800.jpeg",
-    "Z Assets/Images/Pasted image 20251115072800.png",
-    "Z Assets/Images/ad6972e7a5eb3717e11d39544d881cc8_MD5.png",
-    "Z Assets/Images/Pasted image 20251113083405.jpeg",
-    "Z Assets/Images/Pasted image 20251113083405.png",
-    "Z Assets/Images/Pasted image 20251108075054.jpeg",
-    "Z Assets/Images/Pasted image 20251108075054.png",
-    "Z Assets/Images/Pasted image 20251105034126.jpeg",
+    "Operating Systems/Linux/Efficiency/Strings play.md",
+    "Operating Systems/Linux/Efficiency/Tmux.md",
+    "Web/SQL/0. SQL injection Methodology.md",
+    "Web/GraphQL/Understand/Understand GraphQL.md",
+    "Web/GraphQL/Understand",
+    "Web/GraphQL",
+    "z Temp.md",
+    "Technologies/Languages/php/0. Tricks.md",
+    "Technologies/Languages/php",
+    "Web/Insecure deserialization/Understand/0. Understand Insecure deserialization.md",
+    "Web/SSTI/0. Ideas.md",
+    "Web/Insecure deserialization/Understand",
+    "Web/Insecure deserialization",
+    "Web/Client Side/XSS/1. Ideas.md",
+    "Labs/THM/easy/Soupedecode_01.md",
+    "Labs/THM/easy/Billing.md",
+    "Labs/THM/easy/Brains.md",
+    "Labs/THM/easy/Publisher.md",
+    "Labs/THM/easy/Pyrat.md",
+    "Labs/THM/medium/Voyage.md",
+    "Labs/THM/medium/Injectics.md",
+    "Labs/THM/medium/Biblioteca.md",
+    "Web/SSTI/Payloads/Handlebars NodeJS.md",
+    "Web/SSTI/Payloads",
+    "Web/SSTI/1. Detection.md",
+    "Web/Client Side/XSS/Dangling Markup",
+    "Web/SSTI",
+    "Z Assets/Images/420c1913bbe07d610cbc3079c5582587_MD5.png",
+    "Web/SSTI/Understand",
+    "Web/Host Header Injection/Understand",
+    "Z Assets/Images/7cc3ef64c89719f04a39d31c215d861d_MD5.svg",
+    "Z Assets/Images/4bcf639d29af7f92564974467d9d4461_MD5.png",
+    "Z Assets/Images/d5da87ba0695d0932fc1f86816c07c22_MD5.svg",
+    "Z Assets/Images/Pasted image 20251222002550.jpeg",
+    "Z Assets/Images/Pasted image 20251222002550.png",
+    "Z Assets/Images/2173cdbb14f1ff16d004c2d182fb1bb5_MD5.png",
+    "Z Assets/Images/b1840891425d6a5f0df295d8039dc7b4_MD5.png",
+    "Z Assets/Images/e048ff4a7860da9b76e5035d1cf8c164_MD5.png",
+    "Z Assets/Images/698c5ea5f8a0eb7abf93c20654f77e3a_MD5.png",
+    "Active Directory/9 NTLM Rely/Untitled.canvas",
     "Untitled.canvas",
     "HTB/linux/easy/Untitled.canvas",
     "Z Assets/Templates/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
@@ -301,7 +317,6 @@
     "Templates/Labs/Lab 1 - Example/LAB 1.canvas",
     "obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
     "obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas",
-    "Z Assets/obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas",
-    "Z Assets/obsidian-template/Labs/Lab 1 - Example/LAB 1.canvas"
+    "Z Assets/obsidian-template/Labs/Lab 2 - Vuln. Research/OpenCart 4.0.2.3.canvas"
   ]
 }
