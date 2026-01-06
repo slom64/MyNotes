@@ -27,7 +27,15 @@ Most of the types defined are object types, which define the objects available a
 
 The example below shows a simple schema definition for a Product type. The `!` operator indicates that the field is non-nullable when called (that is, mandatory).
 
-`#Example schema definition type Product { id: ID! name: String! description: String! price: Int }`
+```graphql
+#Example schema definition
+type Product {
+    id: ID!
+    name: String!
+    description: String!
+    price: Int
+}
+```
 
 Schemas must also include at least one available query. Usually, they also contain details of available mutations.
 
@@ -44,7 +52,16 @@ Queries usually have the following key components:
 
 The example below shows a query called `myGetProductQuery` that requests the name, and description fields of a product with the `id` of `123`.
 
-`#Example query query myGetProductQuery { getProduct(id: 123) { name description } }`
+```
+#Example query
+
+query myGetProductQuery {
+	getProduct(id: 123) {
+		name
+		description
+	}
+}
+```
 
 Note that the product type may contain more fields in the schema than those requested here. The ability to request only the data you need is a significant part of the flexibility of GraphQL.
 
@@ -56,8 +73,31 @@ Like queries, mutations have an operation type, name, and structure for the retu
 
 The example below shows a mutation to create a new product and its associated response. In this case, the service is configured to automatically assign an ID to new products, which has been returned as requested.
 
-`#Example mutation request mutation { createProduct(name: "Flamin' Cocktail Glasses", listed: "yes") { id name listed } }` `#Example mutation response { "data": { "createProduct": { "id": 123, "name": "Flamin' Cocktail Glasses", "listed": "yes" } } }`
+```graphql
+#Example mutation request
 
+mutation {
+	createProduct(name: "Flamin' Cocktail Glasses", listed: "yes") {
+		id
+		name
+		listed
+	}
+}
+```
+
+```graphql
+#Example mutation response
+
+{
+	"data": {
+		"createProduct": {
+			"id": 123,
+			"name": "Flamin' Cocktail Glasses",
+			"listed": "yes"
+		}
+	}
+}
+```
 ## Components of queries and mutations
 
 The GraphQL syntax includes several common components for queries and mutations.
@@ -68,7 +108,44 @@ All GraphQL types contain items of queryable data called fields. When you send a
 
 The example below shows a query to get ID and name details for all employees, and its associated response. In this case, `id`, `name.firstname`, and `name.lastname` are the fields requested.
 
-`#Request query myGetEmployeeQuery { getEmployees { id name { firstname lastname } } }` `#Response { "data": { "getEmployees": [ { "id": 1, "name" { "firstname": "Carlos", "lastname": "Montoya" } }, { "id": 2, "name" { "firstname": "Peter", "lastname": "Wiener" } } ] } }`
+```graphql
+#Request
+
+query myGetEmployeeQuery {
+	getEmployees {
+		id
+		name {
+			firstname
+			lastname
+		}
+	}
+}
+```
+
+```graphql
+#Response
+
+{
+	"data": {
+		"getEmployees": [
+			{
+				"id": 1,
+				"name" {
+					"firstname": "Carlos",
+					"lastname": "Montoya"
+				}
+			},
+			{
+				"id": 2,
+				"name" {
+					"firstname": "Peter",
+					"lastname": "Wiener"
+				}
+			}
+		]
+	}
+}
+```
 
 ### Arguments
 
@@ -78,8 +155,36 @@ When you send a query or mutation that contains arguments, the GraphQL server de
 
 The example below shows a `getEmployee` request that takes an employee ID as an argument. In this case, the server responds with only the details of the employee who matches that ID.
 
-`#Example query with arguments query myGetEmployeeQuery { getEmployees(id:1) { name { firstname lastname } } }` `#Response to query { "data": { "getEmployees": [ { "name" { "firstname": Carlos, "lastname": Montoya } } ] } }`
+```graphql
+#Example query with arguments
 
+query myGetEmployeeQuery {
+	getEmployees(id:1) {
+		name {
+			firstname
+			lastname
+		}
+	}
+}
+```
+
+```graphql
+#Response to query
+
+{
+	"data": {
+		"getEmployees": [
+		{
+			"name" {
+				"firstname": Carlos,
+				"lastname": Montoya
+				}
+			}
+		]
+	}
+}
+
+```
 #### Note
 
 If user-supplied arguments are used to access objects directly then a GraphQL API can be vulnerable to access control vulnerabilities such as insecure direct object references (IDOR).
@@ -98,7 +203,23 @@ When building a query or mutation that uses variables, you need to:
 
 The example below shows the same query as in the previous example, but with the ID passed as a variable instead of as a direct part of the query string.
 
-`#Example query with variable query getEmployeeWithVariable($id: ID!) { getEmployees(id:$id) { name { firstname lastname } } } Variables: { "id": 1 }`
+```graphql
+#Example query with variable
+
+query getEmployeeWithVariable($id: ID!) {
+	getEmployees(id:$id) {
+		name {
+			firstname
+			lastname
+		}
+	 }
+}
+
+Variables:
+{
+	"id": 1
+}
+```
 
 In this example, the variable is declared in the first line with (`$id: ID!`). The `!` indicates that this is a required field for this query. It is then used as an argument in the second line with (`id:$id`). Finally, the value of the variable itself is set in the variable JSON dictionary. For information on how to test for these vulnerabilities, see [GraphQL API vulnerabilities](https://portswigger.net/web-security/graphql).
 
@@ -106,13 +227,55 @@ In this example, the variable is declared in the first line with (`$id: ID!`). T
 
 GraphQL objects can't contain multiple properties with the same name. For example, the following query is invalid because it tries to return the `product` type twice.
 
-`#Invalid query query getProductDetails { getProduct(id: 1) { id name } getProduct(id: 2) { id name } }`
+```graphql
+#Invalid query
+
+query getProductDetails {
+	getProduct(id: 1) {
+		id
+		name
+	}
+	getProduct(id: 2) {
+		id
+		name
+	}
+}
+```
 
 Aliases enable you to bypass this restriction by explicitly naming the properties you want the API to return. You can use aliases to return multiple instances of the same type of object in one request. This helps to reduce the number of API calls needed.
 
 In the example below, the query uses aliases to specify a unique name for both products. This query now passes validation, and the details are returned.
+```graphql
+#Valid query using aliases
 
-`#Valid query using aliases query getProductDetails { product1: getProduct(id: "1") { id name } product2: getProduct(id: "2") { id name } }` `#Response to query { "data": { "product1": { "id": 1, "name": "Juice Extractor" }, "product2": { "id": 2, "name": "Fruit Overlays" } } }`
+query getProductDetails {
+	product1: getProduct(id: "1") {
+		id
+		name
+	}
+	product2: getProduct(id: "2") {
+		id
+		name
+	}
+}
+```
+
+```graphql
+#Response to query
+
+{
+	"data": {
+		"product1": {
+			"id": 1,
+			"name": "Juice Extractor"
+		 },
+		"product2": {
+			"id": 2,
+			"name": "Fruit Overlays"
+		}
+	}
+}
+```
 
 #### Note
 
@@ -128,8 +291,42 @@ Once defined, they can be included in queries or mutations. If they are subseque
 
 The example below shows a `getProduct` query in which the details of the product are contained in a `productInfo` fragment.
 
-`#Example fragment fragment productInfo on Product { id name listed }` `#Query calling the fragment query { getProduct(id: 1) { ...productInfo stock } }` `#Response including fragment fields { "data": { "getProduct": { "id": 1, "name": "Juice Extractor", "listed": "no", "stock": 5 } } }`
+```graphql
+#Example fragment
 
+fragment productInfo on Product {
+	id
+	name
+	listed
+}
+```
+
+```graphql
+#Query calling the fragment
+
+query {
+	getProduct(id: 1) {
+		...productInfo
+		stock
+	}
+}
+```
+
+```graphql
+#Response including fragment fields
+
+{
+	"data": {
+		"getProduct": {
+			"id": 1,
+			"name": "Juice Extractor",
+			"listed": "no",
+			"stock": 5
+		}
+	}
+}
+
+```
 ## Subscriptions
 
 Subscriptions are a special type of query. They enable clients to establish a long-lived connection with a server so that the server can then push real-time updates to the client without the need to continually poll for data. They are primarily useful for small changes to large objects and for functionality that requires small real-time updates (like chat systems or collaborative editing).
